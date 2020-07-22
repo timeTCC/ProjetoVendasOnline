@@ -68,6 +68,7 @@ CREATE TABLE productTable(
     stockProd INT NOT NULL,
     priceProd FLOAT NOT NULL,
     imageProd char(50) NOT NULL,
+    previewProd INT NOT NULL,
     department char(50) NOT NULL,   
     FOREIGN KEY (department) REFERENCES departmentTable(department),
     PRIMARY KEY (productId)
@@ -83,7 +84,7 @@ CREATE TABLE departmentTable(
 SHOW TABLES;
 
 -------------------Select TABELAS-----------------
-SELECT * FROM usersTable;
+SELECT * FROM productTable;
 
 -------------------Iserir na TABELA usuarios admin-
 INSERT INTO usersTable(nameUser, cpfUser, phoneUser, emailUser, passwordUser, profileUser)
@@ -94,5 +95,5 @@ ALTER TABLE usersTable
 MODIFY COLUMN emailUser char(30) NOT NULL;
 
 ---------------------Alterar a tabela modificando colunas----------
-ALTER TABLE users
-ADD  NOT NULL;
+ALTER TABLE productTable
+ADD previewProd INT NOT NULL;

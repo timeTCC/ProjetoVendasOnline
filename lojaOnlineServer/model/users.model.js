@@ -19,6 +19,9 @@ const Users = db.define('users', {
     },
     passwordUser: {
         type: db.Sequelize.STRING
+    },
+    profileUser: {
+        type: db.Sequelize.STRING
     }
 }, {
     timestamps: false

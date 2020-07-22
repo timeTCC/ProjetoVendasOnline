@@ -5,13 +5,13 @@ const Users = require('../model/users.model');
 //aqui recebo as informações do front e respondo com sucesso ou erro
 router.post('/authenticate', (req, res) =>{  //validação do usuario no BD
   Users.findOne({where: { //procuro uma linha ONDE usuario recebido pelo front seja igual o usuario do BD
-    nameUser: req.body.user,     
+    emailUser: req.body.email,     
   }}).then((user) =>{   
     if(!user){
       return res.status(404).send('user not found') //caso não encontre o usuario volta erro 400 "usuario nao encontrado"
     }
     if(user.passwordUser === req.body.password){ //verificação da senha
-      return res.send({user: user.nameUser}) //caso encontre o usuario eu retorno o usuario para o front
+      return res.send({user: user.nameUser, cpf: user.cpfUser, phone: user.phoneUser, email: user.emailUser, profile: user.profileUser }) //caso encontre o usuario eu retorno o usuario para o front
     }else{
       return res.status(400).send('invalid password') //senha invalida erro 400
     }
@@ -22,13 +22,16 @@ router.post('/authenticate', (req, res) =>{  //validação do usuario no BD
 
 router.post('/create', (req, res) =>{//endereço register
   Users.findOne({where: { //procura na tabela users
-    nameUser: req.body.user, //onde userName é igual o parametro passado pelo front
+    emailUser: req.body.email, //onde userName é igual o parametro passado pelo front
   }}).then((user) =>{
     if(!user){// se na tabela não ouver nenhum usuario com o nome que esta sendo inserido entao ele cria um novo usuario
       Users.create({// é criado na tabela
-        nameUser: req.body.user,
+        nameUser: req.body.user, 
         cpfUser: req.body.cpf,
-        passwordUser: req.body.password,        
+        phoneUser: req.body.phone,
+        emailUser: req.body.email, 
+        passwordUser: req.body.password,
+        profileUser: req.body.profile       
       }).then(()=>{
         return res.status(201).send('usuário criado com sucesso')
       }).catch((error) =>{

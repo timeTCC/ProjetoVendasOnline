@@ -20,6 +20,28 @@ router.post('/authenticate', (req, res) =>{  //validação do usuario no BD
   })
 })
 
+router.post('/create', (req, res) =>{//endereço register
+  Users.findOne({where: { //procura na tabela users
+    nameUser: req.body.user, //onde userName é igual o parametro passado pelo front
+  }}).then((user) =>{
+    if(!user){// se na tabela não ouver nenhum usuario com o nome que esta sendo inserido entao ele cria um novo usuario
+      Users.create({// é criado na tabela
+        nameUser: req.body.user,
+        cpfUser: req.body.cpf,
+        passwordUser: req.body.password,        
+      }).then(()=>{
+        return res.status(201).send('usuário criado com sucesso')
+      }).catch((error) =>{
+        return res.status(500).send(error)
+      })
+    }else{  
+      console.log('usuário já existe')  
+      return res.status(400).send('usuário já existe')      
+    }
+  }).catch((error) =>{
+    return res.status(500).send(error)
+  })  
+})
 //teste do console log 
 // router.post('/authenticate', (req, res) =>{
 //   console.log('user: ', req.body.user,'password: ', req.body.password);

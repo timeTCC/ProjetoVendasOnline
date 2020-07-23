@@ -13,8 +13,8 @@ USE lojaOnline;
 CREATE TABLE usersTable(
     userId INT NOT NULL AUTO_INCREMENT,
     nameUser char(100) NOT NULL,
-    cpfUser INT NOT NULL,
-    phoneUser INT NOT NULL,
+    cpfUser char(20) NOT NULL,
+    phoneUser char(20) NOT NULL,
     emailUser char(100) NOT NULL,
     passwordUser char(20) NOT NULL,
     profileUser char(20) NOT NULL,
@@ -93,7 +93,7 @@ VALUES ('Karina', 123456789, 1199999999, 'karina@karina.com', 123456, 'admin');
 
 ---------------------Alterar a tabela modificando---------------
 ALTER TABLE usersTable
-MODIFY COLUMN emailUser char(30) NOT NULL;
+MODIFY COLUMN cpfUser char(20) NOT NULL;
 
 ---------------------Alterar a tabela acrescentando colunas----------
 ALTER TABLE productTable

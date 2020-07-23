@@ -37,7 +37,7 @@ CREATE TABLE addressTable(
 
 -------------------Criar TABELA PRODUTO-------------
 CREATE TABLE productTable(
-    productId INT NOT NULL AUTO_INCREMENT,
+    productId INT NOT NULL,
     nameProd char(100) NOT NULL,
     stockProd INT NOT NULL,
     priceProd FLOAT NOT NULL,
@@ -92,8 +92,8 @@ INSERT INTO usersTable(nameUser, cpfUser, phoneUser, emailUser, passwordUser, pr
 VALUES ('Karina', 123456789, 1199999999, 'karina@karina.com', 123456, 'admin');
 
 ---------------------Alterar a tabela modificando---------------
-ALTER TABLE usersTable
-MODIFY COLUMN cpfUser char(20) NOT NULL;
+ALTER TABLE productTable
+MODIFY COLUMN productId INT NOT NULL;
 
 ---------------------Alterar a tabela acrescentando colunas----------
 ALTER TABLE productTable

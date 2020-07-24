@@ -9,7 +9,7 @@ import api from '../../services/api';
 import Header from '../../components/Header';
 
 const Login = () => {
-    const [ formData, setFormData ] = useState({ email: String, password: String });
+    const [ formData, setFormData ] = useState({ emailUser: String, passwordUser: String });
     const [ loginStatus, setLoginStatus ] = useState('');
     const [ loadingButton, setLoadingButton ] = useState('Entrar');
 
@@ -19,6 +19,8 @@ const Login = () => {
 
     async function handleSubmit(event){
         event.preventDefault();
+
+        console.log(formData);
 
         isButtonLoading(true);
 
@@ -68,10 +70,6 @@ const Login = () => {
         setFormData({ ...formData, [name]: value});
     }
 
-    useEffect(()=>{
-        console.log(formData);
-    }, [formData])
-
     return (
         <div id="page-Login">
             <Header />
@@ -81,7 +79,7 @@ const Login = () => {
                     <h2 className='title'>Login</h2>
                     <input 
                         type="text" 
-                        name="email" 
+                        name="emailUser" 
                         id="email-input" 
                         className='login-text-input' 
                         placeholder="E-mail" 
@@ -90,7 +88,7 @@ const Login = () => {
                     />
                     <input 
                         type="password" 
-                        name="password" 
+                        name="passwordUser" 
                         id="password-input" 
                         className='login-text-input' 
                         placeholder="senha"

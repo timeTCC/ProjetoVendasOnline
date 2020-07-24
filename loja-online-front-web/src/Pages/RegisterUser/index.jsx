@@ -33,12 +33,12 @@ const RegisterUser = () => {
         isButtonLoading(true);
 
         const parsedFormData = {
-            'user': formData.name,
-            'cpf': formData.CPF,
-            'phone': formData.cellPhone,
-            'email': formData.email,
-            'password': formData.password,
-            'profile': 'client',
+            'nameUser': formData.name,
+            'cpfUser': formData.CPF,
+            'phoneUser': formData.cellPhone,
+            'emailUser': formData.email,
+            'passwordUser': formData.password,
+            'profileUser': 'client',
         }
 
         console.log(parsedFormData)
@@ -47,7 +47,7 @@ const RegisterUser = () => {
             isButtonLoading(false);
 
             setformStatus(' ');
-            cookies.set('userName', parsedFormData.user, { path: '/' });
+            cookies.set('userName', parsedFormData.nameUser, { path: '/' });
 
             history.push('/');
         }).catch((error)=>{

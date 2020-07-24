@@ -9,10 +9,10 @@ const Users = db.define('userstable', {
         type: db.Sequelize.STRING
     },
     cpfUser: {
-        type: db.Sequelize.INTEGER
+        type: db.Sequelize.STRING
     },
     phoneUser: {
-        type: db.Sequelize.INTEGER
+        type: db.Sequelize.STRING
     },
     emailUser: {
         type: db.Sequelize.STRING
@@ -24,7 +24,8 @@ const Users = db.define('userstable', {
         type: db.Sequelize.STRING
     }
 }, {
-    timestamps: false
+    timestamps: false,
+    freezeTableName: true
 })
 
 //exporto o modulo 

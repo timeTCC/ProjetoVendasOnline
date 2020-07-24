@@ -1,20 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FiSearch, FiUser, FiChevronDown } from 'react-icons/fi';
 import { useHistory, Link } from 'react-router-dom';
+import { Cookies } from 'react-cookie';
 
-import DropdownMenu from '../DropdownMenu';
+import DropdownMenu from './DropdownMenu';
+import UserMenu from './UserMenu';
 
 import './styles.css';
 
 const Header = () => {
+    const [ userName, setUserName ] = useState('Usuário');
 
     const history = useHistory();
+    const cookies = new Cookies;
 
     function handleSearch(event) {
         event.preventDefault();
 
         console.log('pesquisa');
     }
+
+    useEffect(()=>{
+        if(cookies.get('userName') !== undefined){
+            setUserName(cookies.get('userName'));
+        }     
+    }, [userName]);
 
     return(
         <header className='opener'>
@@ -37,23 +47,9 @@ const Header = () => {
                                 <FiSearch color="#313131" size={20}/>
                             </button>
                         </form>
-                        <div className="vertical-container">
-                            <div className='user-menu'>
-                                <div className="icon">
-                                    <FiUser size={24}/>
-                                </div>
-                                <div className="text">
-                                    Usuário
-                                </div> 
-                                <div>
-                                    <FiChevronDown size={24}/>
-                                </div>
-                            </div>
-                            <div className="horizontal-container login-opts">
-                                <Link className='link' to='/login'>Login</Link>
-                                <Link className='link' to='/registrar-se'>Registrar-se</Link>
-                            </div>
-                        </div>
+                        
+                        <UserMenu />
+
                     </div>
 
                 </div>

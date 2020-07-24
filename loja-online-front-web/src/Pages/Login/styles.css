@@ -26,7 +26,7 @@
     background: #FF9F10;
     border-radius: 8px;
     border: none;
-    margin: 60px auto 7px auto;
+    margin: 45px auto 7px auto;
 
     font-family: Roboto;
     font-style: normal;
@@ -72,4 +72,13 @@
 
 #login-form .title{
     margin: 7px auto 40px auto;
+}
+
+#login-form .login-status{
+    margin: 0px auto 5px auto;
+    height: 10px;
+}
+
+#login-form .login-submit-button .loading{
+    margin-left: 135px;
 }

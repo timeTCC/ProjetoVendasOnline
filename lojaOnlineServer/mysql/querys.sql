@@ -1,7 +1,7 @@
 -------------------Deletar DATABASES--------------
 DROP DATABASE lojaonline;
 
-DROP TABLE departmentTable;
+DROP TABLE usersTable;
 
 -------------------Criar DATABASES----------------
 CREATE DATABASE lojaOnline;
@@ -13,8 +13,8 @@ USE lojaOnline;
 CREATE TABLE usersTable(
     userId INT NOT NULL AUTO_INCREMENT,
     nameUser char(100) NOT NULL,
-    cpfUser INT NOT NULL,
-    phoneUser INT NOT NULL,
+    cpfUser char(14) NOT NULL,
+    phoneUser char(14) NOT NULL,
     emailUser char(100) NOT NULL,
     passwordUser char(20) NOT NULL,
     profileUser char(20) NOT NULL,

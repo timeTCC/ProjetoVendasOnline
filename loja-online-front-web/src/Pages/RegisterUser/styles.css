@@ -43,6 +43,10 @@
     outline: none;
 }
 
+#register-form .register-submit-button .loading{
+    margin-left: 140px;
+}
+
 #register-form .register-text-input{
     margin: 10px auto;
     width: 80%;

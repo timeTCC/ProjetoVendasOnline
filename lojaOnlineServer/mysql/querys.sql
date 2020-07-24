@@ -1,7 +1,7 @@
 -------------------Deletar DATABASES--------------
 DROP DATABASE lojaonline;
 
-DROP TABLE departmentTable;
+DROP TABLE usersTable;
 
 -------------------Criar DATABASES----------------
 CREATE DATABASE lojaOnline;
@@ -13,8 +13,8 @@ USE lojaOnline;
 CREATE TABLE usersTable(
     userId INT NOT NULL AUTO_INCREMENT,
     nameUser char(100) NOT NULL,
-    cpfUser char(20) NOT NULL,
-    phoneUser char(20) NOT NULL,
+    cpfUser char(14) NOT NULL,
+    phoneUser char(14) NOT NULL,
     emailUser char(100) NOT NULL,
     passwordUser char(20) NOT NULL,
     profileUser char(20) NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE addressTable(
 
 -------------------Criar TABELA PRODUTO-------------
 CREATE TABLE productTable(
-    productId INT NOT NULL,
+    productId INT NOT NULL AUTO_INCREMENT,
     nameProd char(100) NOT NULL,
     stockProd INT NOT NULL,
     priceProd FLOAT NOT NULL,
@@ -92,8 +92,8 @@ INSERT INTO usersTable(nameUser, cpfUser, phoneUser, emailUser, passwordUser, pr
 VALUES ('Karina', 123456789, 1199999999, 'karina@karina.com', 123456, 'admin');
 
 ---------------------Alterar a tabela modificando---------------
-ALTER TABLE productTable
-MODIFY COLUMN productId INT NOT NULL;
+ALTER TABLE usersTable
+MODIFY COLUMN emailUser char(30) NOT NULL;
 
 ---------------------Alterar a tabela acrescentando colunas----------
 ALTER TABLE productTable

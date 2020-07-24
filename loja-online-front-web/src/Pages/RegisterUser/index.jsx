@@ -1,35 +1,72 @@
 import React, { useState, useEffect } from 'react';
 import InputMask from 'react-input-mask';
-
-import Header from '../../components/Header';
+import ReactLoading from 'react-loading';
+import { Cookies } from 'react-cookie';
+import { useHistory } from 'react-router-dom';
 
 import './styles.css';
 
+import api from '../../services/api';
+import Header from '../../components/Header';
+
 const RegisterUser = () => {
-    const [ passwordStatus, setPasswordStatus ] = useState('');
+    const [ formStatus, setformStatus ] = useState('');
     const [ disableButton, setDisableButton ] = useState(false);
+    const [ loadingButton, setLoadingButton ] = useState('Cadastre-se!');
+
+    const cookies = new Cookies();
+    const history = useHistory();
 
     const [ formData, setFormData ] = useState({
         'name': String,
         'CPF': String,
         'cellPhone': String,
         'email': String,
+        'confirmEmail': String,
         'password': String,
         'confirmPassword': String
     });
 
-    function handleSubmit(event){
+    async function handleSubmit(event){
         event.preventDefault();
 
+        isButtonLoading(true);
+
         const parsedFormData = {
-            'name': formData.name,
-            'CPF': formData.CPF,
-            'cellPhone': formData.cellPhone,
+            'user': formData.name,
+            'cpf': formData.CPF,
+            'phone': formData.cellPhone,
             'email': formData.email,
             'password': formData.password,
+            'profile': 'client',
         }
 
-        console.log(parsedFormData);
+        console.log(parsedFormData)
+
+        await api.post('/users/create', parsedFormData).then((response)=>{
+            isButtonLoading(false);
+
+            setformStatus(' ');
+            cookies.set('userName', parsedFormData.user, { path: '/' });
+
+            history.push('/');
+        }).catch((error)=>{
+            switch (error.response.status) {
+                case 400:
+                    setformStatus("Oops, já temos um cadastro com esse e-mail.");
+                    break;
+                case 404:
+                    setformStatus("Oops, já temos um cadastro com esse CPF.");
+                    break;
+                case 500:
+                    setformStatus("Oops, erro ao efetuar o cadastro.");
+                    break;
+            }
+
+            isButtonLoading(false)
+
+            console.log("Erro ao efetuar o login: " + error);
+        });
     }
 
     function handleInputChange(event){
@@ -38,13 +75,30 @@ const RegisterUser = () => {
         setFormData({ ...formData, [name]: value });
     }
 
+    function isButtonLoading(loading){
+        if(loading){
+            setLoadingButton(
+                <div className='loading'>
+                    <ReactLoading type='spin' height={'20%'} width={'20%'} />
+                </div>
+            );
+        } else {
+            setLoadingButton('Cadastre-se!');
+        }
+    }
+
     useEffect(() => {
-        if(formData.password != formData.confirmPassword){
-            setPasswordStatus('Senhas Diferem!');
+        if(formData.email != formData.confirmEmail){
+            setformStatus('Emails Diferem!');
             setDisableButton(true);
         } else {
-            setPasswordStatus('');
-            setDisableButton(false);
+            if(formData.password != formData.confirmPassword){
+                setformStatus('Senhas Diferem!');
+                setDisableButton(true);
+            } else {
+                setformStatus('');
+                setDisableButton(false);
+            }
         }
         
     }, [formData]);
@@ -83,7 +137,7 @@ const RegisterUser = () => {
                             id="cellPhone-input" 
                             className='register-text-input' 
                             placeholder="Celular"
-                            mask="(99)9999-9999"
+                            mask="(99)99999-9999"
                             required
                             onChange={handleInputChange} 
                         />
@@ -128,9 +182,9 @@ const RegisterUser = () => {
                             onChange={handleInputChange}
                         />
                     </div>
-                    <p className='password-status'>{passwordStatus}</p>
+                    <p className='password-status'>{formStatus}</p>
 
-                    <button className='register-submit-button' type="submit">Cadastrar-se!</button>
+                    <button className='register-submit-button' type="submit">{loadingButton}</button>
 
                 </form>     
 

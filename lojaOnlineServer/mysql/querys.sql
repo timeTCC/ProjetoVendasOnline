@@ -41,7 +41,7 @@ CREATE TABLE productTable(
     nameProd char(100) NOT NULL,
     stockProd INT NOT NULL,
     priceProd FLOAT NOT NULL,
-    imageProd char(50) NOT NULL,
+    imageProd LONGBLOB NOT NULL,
     previewProd INT NOT NULL,
     subdepartment char(50) NOT NULL,   
     FOREIGN KEY (subdepartment) REFERENCES subdepartmentTable(subdepartment),
@@ -92,8 +92,13 @@ INSERT INTO usersTable(nameUser, cpfUser, phoneUser, emailUser, passwordUser, pr
 VALUES ('Karina', 123456789, 1199999999, 'karina@karina.com', 123456, 'admin');
 
 ---------------------Alterar a tabela modificando---------------
+<<<<<<< HEAD
 ALTER TABLE usersTable
 MODIFY COLUMN emailUser char(30) NOT NULL;
+=======
+ALTER TABLE productTable
+MODIFY COLUMN imageProd LONGBLOB NOT NULL;
+>>>>>>> 482c23781a9ebb76ed59ea575cc780e389a55357
 
 ---------------------Alterar a tabela acrescentando colunas----------
 ALTER TABLE productTable

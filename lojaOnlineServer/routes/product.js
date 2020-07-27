@@ -17,6 +17,7 @@ router.post('/', (req, res) =>{
       if(!product){// se na tabela não ouver nenhum produto como o mesmo cosg de barras entao ele cria um novo
         Products.create({// é criado na tabela
             nameProd: req.body.nameProd,
+            stockProd: req.body.stockProd,
             priceProd: req.body.priceProd,
             imageProd: req.body.imageProd,
             previewProd: req.body.previewProd,

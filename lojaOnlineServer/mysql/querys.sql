@@ -93,7 +93,7 @@ VALUES ('Karina', 123456789, 1199999999, 'karina@karina.com', 123456, 'admin');
 
 ---------------------Alterar a tabela modificando---------------
 ALTER TABLE productTable
-MODIFY COLUMN imageProd LONGBLOB NOT NULL;
+MODIFY COLUMN priceProd FLOAT NOT NULL;
 
 ---------------------Alterar a tabela acrescentando colunas----------
 ALTER TABLE productTable

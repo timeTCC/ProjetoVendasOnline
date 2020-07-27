@@ -12,7 +12,7 @@ const Products = db.define('productTable', {
         type: db.Sequelize.FLOAT
     },
     imageProd: {
-        type: db.Sequelize.LONGBLOB
+        type: db.Sequelize.BLOB('long')
     },
     previewProd: {
         type: db.Sequelize.INTEGER

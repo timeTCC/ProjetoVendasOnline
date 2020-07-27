@@ -6,8 +6,8 @@ import { useHistory } from 'react-router-dom';
 
 import './styles.css';
 
-import api from '../../services/api';
-import Header from '../../components/Header';
+import api from '../../../services/api';
+import Header from '../../../components/Header';
 
 const RegisterUser = () => {
     const [ formStatus, setformStatus ] = useState('');

@@ -5,8 +5,8 @@ import ReactLoading from 'react-loading';
 
 import './styles.css';
 
-import api from '../../services/api';
-import Header from '../../components/Header';
+import api from '../../../services/api';
+import Header from '../../../components/Header';
 
 const Login = () => {
     const [ formData, setFormData ] = useState({ emailUser: String, passwordUser: String });

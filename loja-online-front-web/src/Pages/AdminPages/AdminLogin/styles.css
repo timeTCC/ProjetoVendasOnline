@@ -1,0 +1,84 @@
+#page-admin-Login{
+    height: 100vh;
+}
+
+#page-admin-Login .page-content{
+    height: 70vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#login-form{
+    height: 425px;
+    width: 390px;
+    background: #FDFCFC;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+#login-form .login-submit-button{
+    width: 305px;
+    height: 60px;
+    background: #FF9F10;
+    border-radius: 8px;
+    border: none;
+    margin: 45px auto 7px auto;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+
+    text-align: center;
+    color: #EFEFEF;
+
+    cursor: pointer;
+}
+
+#login-form .login-submit-button:focus{
+    outline: none;
+}
+
+#login-form .login-text-input{
+    margin: 30px auto;
+    width: 280px;
+    height: 30px;
+    padding-left: 15px;
+    border: none;
+    border-radius: 0px;
+    background-color: #FDFCFC;
+    border-bottom: 2px solid #FF9F10;
+    color: #FDB446;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+}
+
+#login-form .login-text-input::placeholder{
+    color: #fdb44698;
+
+}
+
+#login-form .login-text-input:focus{
+    outline: none;
+}
+
+#login-form .title{
+    margin: 7px auto 40px auto;
+}
+
+#login-form .login-status{
+    margin: 0px auto 5px auto;
+    height: 10px;
+}
+
+#login-form .login-submit-button .loading{
+    margin-left: 135px;
+}

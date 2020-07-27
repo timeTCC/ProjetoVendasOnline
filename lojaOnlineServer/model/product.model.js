@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../mysql/db')
  
-const Users = db.define('productTable', {
+const Products = db.define('productTable', {
     productId: {
         type: db.Sequelize.INTEGER, primaryKey: true
     },
@@ -26,4 +26,4 @@ const Users = db.define('productTable', {
 })
 
 //exporto o modulo 
-module.exports = Users;
+module.exports = Products;

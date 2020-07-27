@@ -43,7 +43,8 @@ CREATE TABLE productTable(
     priceProd FLOAT NOT NULL,
     imageProd LONGBLOB NOT NULL,
     previewProd INT NOT NULL,
-    subdepartment char(50) NOT NULL,   
+    subdepartment char(50) NOT NULL,
+    codgProd INT NOT NULL,   
     FOREIGN KEY (subdepartment) REFERENCES subdepartmentTable(subdepartment),
     PRIMARY KEY (productId)
 );
@@ -97,7 +98,7 @@ MODIFY COLUMN priceProd FLOAT NOT NULL;
 
 ---------------------Alterar a tabela acrescentando colunas----------
 ALTER TABLE productTable
-ADD previewProd INT NOT NULL;
+ADD codgProd INT NOT NULL;
 
 ---------------------Alterar a tabela excluindo colunas----------
 ALTER TABLE usersTable 

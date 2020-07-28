@@ -41,7 +41,8 @@ CREATE TABLE productTable(
     nameProd char(100) NOT NULL,
     stockProd INT NOT NULL,
     priceProd FLOAT NOT NULL,
-    imageProd LONGBLOB NOT NULL,
+    imageProd LONGBLOB,
+    -- imageProd LONGBLOB NOT NULL, PARA TESTE NEM NOT NULL
     previewProd INT NOT NULL,
     subdepartment char(50) NOT NULL,
     codgProd INT NOT NULL,   
@@ -98,7 +99,7 @@ DESCRIBE productTable;
 
 ---------------------Alterar a tabela modificando---------------
 ALTER TABLE productTable
-MODIFY COLUMN priceProd FLOAT NOT NULL;
+MODIFY COLUMN imageProd LONGBLOB;
 
 ---------------------Alterar a tabela acrescentando colunas----------
 ALTER TABLE productTable

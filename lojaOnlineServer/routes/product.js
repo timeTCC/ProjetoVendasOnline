@@ -48,7 +48,8 @@ router.get('/', (req, res)=> {
     codgProd: req.body.codgProd, //codg de barras
   }}).then((product) =>{
     if(product.codgProd === req.body.codgProd){
-      return res.send({nameProd: req.body.nameProd,
+      return res.send({
+        nameProd: req.body.nameProd,
         stockProd: req.body.stockProd,
         priceProd: req.body.priceProd,
         imageProd: req.body.imageProd,
@@ -64,8 +65,11 @@ router.get('/', (req, res)=> {
 })
 
 router.delete('/', (req, res)=> {
-
-  
+  Products.destroy({where: {
+    codgProd: req.body.codgProd, //codg de barras
+  }}).catch((error) =>{
+    return res.status(500).send(error)
+  })
 })
 
 module.exports = router;

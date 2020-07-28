@@ -86,11 +86,15 @@ CREATE TABLE itemsRequestTable(
 SHOW TABLES;
 
 -------------------Select TABELAS-----------------
-SELECT * FROM usersTable;
+SELECT * FROM productTable;
 
 -------------------Iserir na TABELA usuarios admin-
-INSERT INTO usersTable(nameUser, cpfUser, phoneUser, emailUser, passwordUser, profileUser)
+INSERT INTO productTable(nameUser, cpfUser, phoneUser, emailUser, passwordUser, profileUser)
 VALUES ('Karina', 123456789, 1199999999, 'karina@karina.com', 123456, 'admin');
+
+---------------------mostrar a estrutura da tabela---------------
+
+DESCRIBE productTable;
 
 ---------------------Alterar a tabela modificando---------------
 ALTER TABLE productTable

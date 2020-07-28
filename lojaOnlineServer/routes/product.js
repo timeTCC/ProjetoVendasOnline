@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Products = require('../model/product.model')
+//const formidable = require('formidable');
 
 // productId: integer;      
 // nameProd: string;
@@ -11,6 +12,11 @@ const Products = require('../model/product.model')
 // codgProd: integer; 
 
 router.post('/', (req, res) =>{
+  // const form = formidable({ multiples: true });
+  // form.parse(req, (error, fields, files) => {
+  //   console.log(json(fields));
+  //   res.json({ fields, files });
+  // });
     Products.findOne({where: { //procura na tabela produto
       codgProd: req.body.codgProd, //codg de barras
     }}).then((product) =>{
@@ -26,14 +32,14 @@ router.post('/', (req, res) =>{
         }).then(()=>{
           return res.status(201).send('Produto criado com sucesso')
         }).catch((error) =>{
-          return res.status(500).send(error)
+          return res.status(500).send('error não conseguiu cadastrar')
         })
       }else{  
         console.log('codg do produto já existe')  
         return res.status(400).send('codg do produto já existe')      
       }
     }).catch((error) =>{
-      return res.status(500).send(error)
+      return res.status(500).send('error não procurou na tabela')
     })  
  })
 

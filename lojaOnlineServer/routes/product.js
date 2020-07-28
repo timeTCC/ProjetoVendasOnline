@@ -64,6 +64,32 @@ router.get('/', (req, res)=> {
   })
 })
 
+router.put('/', (req, res) =>{
+    Products.findOne({where: { //procura na tabela produto
+      codgProd: req.body.codgProd, //codg de barras
+    }}).then((product) =>{
+      if(product){
+        Products.update({
+          nameProd: req.body.nameProd,
+          stockProd: req.body.stockProd,
+          priceProd: req.body.priceProd,
+          imageProd: req.body.imageProd,
+          previewProd: req.body.previewProd,
+          subdepartement: req.body.subdepartement,
+          codgProd: req.body.codgProd
+      }).then(()=>{
+        return res.status(200).send('Produto alterado com sucesso')
+      }).catch((error) =>{
+        return res.status(500).send('error não conseguiu alterar')
+      })
+      }else{         
+        return res.status(400).send('codg do produto não existe')      
+      }
+    }).catch((error) =>{
+      return res.status(500).send(error)
+    })  
+ })
+
 router.delete('/', (req, res)=> {
   Products.destroy({where: {
     codgProd: req.body.codgProd, //codg de barras

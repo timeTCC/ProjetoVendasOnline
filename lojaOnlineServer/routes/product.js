@@ -12,9 +12,9 @@ const Products = require('../model/product.model')
 
 router.post('/', (req, res) =>{
     Products.findOne({where: { //procura na tabela produto
-    //   codgProd: req.body.codgProd, //codg de barras
+      codgProd: req.body.codgProd, //codg de barras
     }}).then((product) =>{
-      if(!product){// se na tabela não ouver nenhum produto como o mesmo cosg de barras entao ele cria um novo
+      if(!product){// se na tabela não ouver nenhum produto como o mesmo codg de barras entao ele cria um novo
         Products.create({// é criado na tabela
             nameProd: req.body.nameProd,
             stockProd: req.body.stockProd,
@@ -22,7 +22,7 @@ router.post('/', (req, res) =>{
             imageProd: req.body.imageProd,
             previewProd: req.body.previewProd,
             subdepartement: req.body.subdepartement,
-            //codgProd: req.body.codgProd
+            codgProd: req.body.codgProd
         }).then(()=>{
           return res.status(201).send('Produto criado com sucesso')
         }).catch((error) =>{
@@ -35,6 +35,31 @@ router.post('/', (req, res) =>{
     }).catch((error) =>{
       return res.status(500).send(error)
     })  
+ })
+
+router.get('/', (req, res)=> {
+  Products.findOne({where: { //procura na tabela produto
+    codgProd: req.body.codgProd, //codg de barras
+  }}).then((product) =>{
+    if(product.codgProd === req.body.codgProd){
+      return res.send({nameProd: req.body.nameProd,
+        stockProd: req.body.stockProd,
+        priceProd: req.body.priceProd,
+        imageProd: req.body.imageProd,
+        previewProd: req.body.previewProd,
+        subdepartement: req.body.subdepartement,
+        codgProd: req.body.codgProd})
+    }else{
+      return res.status(400).send('produto não existe')
+    }              
+  }).catch((error) =>{
+    return res.status(500).send(error)
   })
+})
+
+router.delete('/', (req, res)=> {
+
+  
+})
 
 module.exports = router;

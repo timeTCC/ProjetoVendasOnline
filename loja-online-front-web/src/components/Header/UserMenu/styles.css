@@ -37,6 +37,7 @@
 
 #user-menu .menu-button .icon{
     size: 24;
+    
     margin-right: 5px;
 }
 
@@ -62,7 +63,8 @@
 }
 
 #user-menu .menu-opt-button{
-    width: 150px;
+    width: 150px !important;
+    height: 50px !important;
 
     margin-left: auto;
     margin-right: auto;
@@ -78,13 +80,13 @@
     color: #FDFCFC;
 }
 
-#user-menu .menu-opt-button:hover > .icon{
+#user-menu .menu .menu-opt-button:hover > .icon{
     margin-right: -5px;
-
+    
     transition: margin-right 0.1s;
 }
 
-#user-menu .menu-opt-button .text{
+#user-menu .menu .menu-opt-button .text{
     font-size: 18px;
     margin-top: 2px;
 
@@ -94,26 +96,38 @@
     user-select: none; /* Standard */
 }
 
+#user-menu .menu .menu-opt-button .link{
+    height: auto;
+    width: auto;
+
+    margin: 0px;
+    margin-top: 6px;
+
+    padding: 0px;
+}
+
 #user-menu .menu-opt-button .icon{
     size: 24;
 
-    margin-top: auto;
+    margin-top: 8px;
     margin-right: 0px;
 
     transition: margin-right 0.1s;
 }
 
-#user-menu .link{
-    text-decoration: none;
-    color: #FDFCFC;
-    font-size: 18px;
-}
 
 /* when isn't */
 #user-menu .login-opts{
     height: auto;
     width: auto;
+
     display: flex;
     flex-direction: row;
-    justify-content: baseline;
+    justify-content: space-around;
+}
+
+#user-menu .login-opts .link{
+    margin: auto;
+    height: auto;
+    width: auto;
 }

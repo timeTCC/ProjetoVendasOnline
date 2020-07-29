@@ -26,13 +26,13 @@ const Routes = () => {
             <Route component={Testes} path='/testes' />
 
             {/* Rotas paginas de administrador */}
-            <Route component={Admin} path='/admin' />
+            {/* <Route component={Admin} path='/admin' /> */}
             <Route component={AdminLogin} path='/admin/login' />
             <Route component={AdminHome} path='/admin/home' />
             <Route component={AdminProducts} path='/admin/produtos' />
             <Route component={AdminOrders} path='/admin/pedidos' />
             <Route component={AdminCategories} path='/admin/categorias' />
-            <Route component={AdminProductRegister} path='/admin/produtos/registrar' />
+            <Route component={AdminProductRegister} path='/admin/registrar-produtos' />
         </BrowserRouter>
     )
 }

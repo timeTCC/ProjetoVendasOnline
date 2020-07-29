@@ -1,0 +1,53 @@
+#page-admin-producs-register .page-content{
+    margin-left: 200px;
+
+    height: calc(100vh - 165px);
+}   
+
+#create-product{
+    height: 90%;
+    width: 90%;
+
+    margin: auto;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    background: #FDFCFC;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#create-product form{
+    height: calc(100% - 40px);
+    width: 45%;
+
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+#create-product form input[type='text']{
+    height: 38px;
+    width: 99%;
+
+    margin: 10px 0px;
+
+    padding: 0px;
+}
+
+#create-product form .input-set{
+    height: auto;  
+    width: 100%;
+
+    padding: 0px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}  
+
+
+#create-product form .input-set input[type='text']{
+    width: 48%;
+}  
+

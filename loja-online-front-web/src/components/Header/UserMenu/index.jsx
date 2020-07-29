@@ -15,7 +15,12 @@ const UserMenu = () => {
 
     useEffect(()=>{
         if(cookies.get('userName')){
-            setUserName(cookies.get('userName'));
+            let name = cookies.get('userName');
+            let firstName = name.split(" ");
+
+            firstName = firstName[0];
+
+            setUserName(firstName);
             setIsLoged(true);
         } else {
             setIsLoged(false);

@@ -7,19 +7,19 @@ import './styles.css';
 const Menu = (props) => {
     const menuItens = [{
         page: 'Home',
-        link: 'home'
+        link: '/admin/home'
     },
     {
         page: 'Produtos',
-        link: 'produtos'
+        link: '/admin/produtos'
     },
     {
         page: 'Categorias',
-        link: 'categorias'
+        link: '/admin/categorias'
     },
     {
         page: 'Pedidos',
-        link: 'pedidos'
+        link: '/admin/pedidos'
     }
 ]
     

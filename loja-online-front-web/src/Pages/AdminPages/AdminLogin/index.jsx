@@ -16,6 +16,12 @@ const AdminLogin = () => {
 
     const history = useHistory();
 
+    useEffect(()=>{
+        if(cookies.userAdminName !== undefined){
+            history.push('/admin/home');
+        }    
+    }, [])
+
     async function handleSubmit(event){
         event.preventDefault();
 

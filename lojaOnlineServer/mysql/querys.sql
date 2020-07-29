@@ -104,7 +104,7 @@ MODIFY COLUMN previewProd BIGINT NOT NULL;
 
 ---------------------Alterar a tabela acrescentando colunas----------
 ALTER TABLE productTable
-ADD codgProd INT NOT NULL;
+ADD descriptionProd char(150) NOT NULL;
 
 ---------------------Alterar a tabela excluindo colunas----------
 ALTER TABLE usersTable 

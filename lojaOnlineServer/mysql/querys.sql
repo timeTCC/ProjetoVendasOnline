@@ -35,17 +35,10 @@ CREATE TABLE addressTable(
     FOREIGN KEY (userId) REFERENCES usersTable(userId)
 );
 
--------------------Criar TABELA ITENS DO DEPARTAMENTO-----------
-CREATE TABLE departmentTable(
-    department char(50) NOT NULL,
-    PRIMARY KEY (department)
-);
-
 -------------------Criar TABELA ITENS DO SUBDEPARTAMENTO-----------
 CREATE TABLE subdepartmentTable(
     subdepartment char(50) NOT NULL,
-    department char(50) NOT NULL,
-    FOREIGN KEY (department) REFERENCES departmentTable(department),
+    department char(50) NOT NULL,    
     PRIMARY KEY (subdepartment)    
 );
 
@@ -59,7 +52,8 @@ CREATE TABLE productTable(
     -- imageProd LONGBLOB NOT NULL, PARA TESTE NEM NOT NULL
     previewProd BIGINT NOT NULL,
     subdepartment char(50) NOT NULL,
-    codgProd BIGINT NOT NULL,   
+    codgProd BIGINT NOT NULL,
+    descriptionProd char(150) NOT NULL,   
     FOREIGN KEY (subdepartment) REFERENCES subdepartmentTable(subdepartment),
     PRIMARY KEY (productId)
 );

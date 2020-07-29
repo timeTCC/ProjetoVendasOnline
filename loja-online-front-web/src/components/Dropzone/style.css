@@ -2,7 +2,7 @@
     height: calc(100% - 40px);
     width: 45%;
 
-    background: #E1FAEC;
+    background: #FDB446;
     border-radius: 5px;
     display: flex;
     justify-content: center;
@@ -22,19 +22,21 @@
 }
 
 .dropzone p {
-    width: calc(100% - 40px);
-    height: calc(100% - 40px);
+    width: calc(100% - 120px);
+    height: calc(100% - 120px);
     border-radius: 5px;
-    border: 1px dashed #4ECB79;
+    border: 1px dashed #FF9F10;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #333;
+    color: #FDFCFC;
+    margin: auto;
+    padding: 40px;
 }
 
 .dropzone p svg {
-    color: #4ECB79;
+    color: #FF9F10;
     width: 24px;
     height: 24px;
     margin-bottom: 8px;

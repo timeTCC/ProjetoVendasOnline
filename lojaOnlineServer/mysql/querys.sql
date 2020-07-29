@@ -45,7 +45,6 @@ CREATE TABLE departmentTable(
 CREATE TABLE subdepartmentTable(
     subdepartment char(50) NOT NULL,
     department char(50) NOT NULL,
-    FOREIGN KEY (department) REFERENCES departmentTable(department),
     PRIMARY KEY (subdepartment)    
 );
 

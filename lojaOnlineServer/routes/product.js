@@ -28,7 +28,8 @@ router.post('/', (req, res) =>{
             imageProd: req.body.imageProd,
             previewProd: req.body.previewProd,
             subdepartment: req.body.subdepartment,
-            codgProd: req.body.codgProd
+            codgProd: req.body.codgProd,
+            descriptionProd: req.body.descriptionProd
         }).then(()=>{
           return res.status(201).send('Produto criado com sucesso')
         }).catch((error) =>{
@@ -55,7 +56,8 @@ router.get('/', (req, res)=> {
         imageProd: product.imageProd,
         previewProd: product.previewProd,
         subdepartement: product.subdepartement,
-        codgProd: product.codgProd})
+        codgProd: product.codgProd,
+        descriptionProd: req.body.descriptionProd})
     }else{
       return res.status(400).send('produto não existe')
     }              
@@ -76,7 +78,8 @@ router.put('/', (req, res) =>{
           imageProd: req.body.imageProd,
           previewProd: req.body.previewProd,
           subdepartment: req.body.subdepartment,
-          codgProd: req.body.codgProd
+          codgProd: req.body.codgProd,
+          descriptionProd: req.body.descriptionProd
       }).then(()=>{
         return res.status(200).send('Produto alterado com sucesso')
       }).catch((error) =>{

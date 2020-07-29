@@ -7,7 +7,7 @@ const Products = db.define('productTable', {
     },
     nameProd: {
         type: db.Sequelize.STRING
-    },
+    },    
     stockProd:{
         type: db.Sequelize.INTEGER
     },
@@ -25,6 +25,9 @@ const Products = db.define('productTable', {
     },
     codgProd: {
         type: db.Sequelize.BIGINT
+    },
+    descriptionProd: {
+        type: db.Sequelize.STRING
     }  
 }, {
     timestamps: false,

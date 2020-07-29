@@ -1,7 +1,7 @@
 -------------------Deletar DATABASES--------------
 DROP DATABASE lojaonline;
 
-DROP TABLE usersTable;
+DROP TABLE productTable;
 
 -------------------Criar DATABASES----------------
 CREATE DATABASE lojaOnline;
@@ -11,7 +11,7 @@ USE lojaOnline;
 
 -------------------Criar TABELA USERS-------------
 CREATE TABLE usersTable(
-    userId INT NOT NULL AUTO_INCREMENT,
+    userId INT AUTO_INCREMENT,
     nameUser char(100) NOT NULL,
     cpfUser char(14) NOT NULL,
     phoneUser char(14) NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE usersTable(
 
 -------------------Criar TABELA ENDEREÇO-------------
 CREATE TABLE addressTable(
-    addressId INT NOT NULL AUTO_INCREMENT,
+    addressId INT AUTO_INCREMENT,
     zipCodeUser INT NOT NULL,
     addressUser char(100) NOT NULL,
     numberAddressUser INT NOT NULL,
@@ -35,17 +35,10 @@ CREATE TABLE addressTable(
     FOREIGN KEY (userId) REFERENCES usersTable(userId)
 );
 
--------------------Criar TABELA PRODUTO-------------
-CREATE TABLE productTable(
-    productId INT NOT NULL AUTO_INCREMENT,
-    nameProd char(100) NOT NULL,
-    stockProd INT NOT NULL,
-    priceProd FLOAT NOT NULL,
-    imageProd char(50) NOT NULL,
-    previewProd INT NOT NULL,
-    subdepartment char(50) NOT NULL,   
-    FOREIGN KEY (subdepartment) REFERENCES subdepartmentTable(subdepartment),
-    PRIMARY KEY (productId)
+-------------------Criar TABELA ITENS DO DEPARTAMENTO-----------
+CREATE TABLE departmentTable(
+    department char(50) NOT NULL,
+    PRIMARY KEY (department)
 );
 
 -------------------Criar TABELA ITENS DO SUBDEPARTAMENTO-----------
@@ -55,15 +48,25 @@ CREATE TABLE subdepartmentTable(
     FOREIGN KEY (department) REFERENCES departmentTable(department),
     PRIMARY KEY (subdepartment)    
 );
--------------------Criar TABELA ITENS DO DEPARTAMENTO-----------
-CREATE TABLE departmentTable(
-    department char(50) NOT NULL,
-    PRIMARY KEY (department)
+
+-------------------Criar TABELA PRODUTO-------------
+CREATE TABLE productTable(
+    productId INT AUTO_INCREMENT,
+    nameProd char(100) NOT NULL,
+    stockProd INT NOT NULL,
+    priceProd FLOAT NOT NULL,
+    imageProd LONGBLOB,
+    -- imageProd LONGBLOB NOT NULL, PARA TESTE NEM NOT NULL
+    previewProd BIGINT NOT NULL,
+    subdepartment char(50) NOT NULL,
+    codgProd BIGINT NOT NULL,   
+    FOREIGN KEY (subdepartment) REFERENCES subdepartmentTable(subdepartment),
+    PRIMARY KEY (productId)
 );
 
 -------------------Criar TABELA PEDIDO-------------
 CREATE TABLE requestTable(
-    requestId INT NOT NULL AUTO_INCREMENT,
+    requestId INT AUTO_INCREMENT,
     userId INT NOT NULL,
     dateRealized INT NOT NULL,
     dateDelivery INT NOT NULL, 
@@ -85,19 +88,23 @@ CREATE TABLE itemsRequestTable(
 SHOW TABLES;
 
 -------------------Select TABELAS-----------------
-SELECT * FROM usersTable;
+SELECT * FROM productTable;
 
 -------------------Iserir na TABELA usuarios admin-
-INSERT INTO usersTable(nameUser, cpfUser, phoneUser, emailUser, passwordUser, profileUser)
-VALUES ('Karina', 123456789, 1199999999, 'karina@karina.com', 123456, 'admin');
+INSERT INTO subdepartmentTable(subdepartment, department)
+VALUES ('geladeiras', 'eletrodomesticos');
+
+---------------------mostrar a estrutura da tabela---------------
+
+DESCRIBE productTable;
 
 ---------------------Alterar a tabela modificando---------------
-ALTER TABLE usersTable
-MODIFY COLUMN emailUser char(30) NOT NULL;
+ALTER TABLE productTable
+MODIFY COLUMN previewProd BIGINT NOT NULL;
 
 ---------------------Alterar a tabela acrescentando colunas----------
 ALTER TABLE productTable
-ADD previewProd INT NOT NULL;
+ADD codgProd INT NOT NULL;
 
 ---------------------Alterar a tabela excluindo colunas----------
 ALTER TABLE usersTable 
@@ -109,3 +116,7 @@ DROP CONSTRAINT profileUser;
 ALTER TABLE usersTable DROP FOREIGN KEY profileUser;
 
 ALTER TABLE usersTable DROP INDEX profileUser;
+
+ALTER TABLE productTable drop primary key, add primary key(codgProd);
+
+SET FOREIGN_KEY_CHECKS = 0;

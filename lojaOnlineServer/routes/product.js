@@ -27,12 +27,12 @@ router.post('/', (req, res) =>{
             priceProd: req.body.priceProd,
             imageProd: req.body.imageProd,
             previewProd: req.body.previewProd,
-            subdepartement: req.body.subdepartement,
+            subdepartment: req.body.subdepartment,
             codgProd: req.body.codgProd
         }).then(()=>{
           return res.status(201).send('Produto criado com sucesso')
         }).catch((error) =>{
-          return res.status(500).send('error não conseguiu cadastrar')
+          return res.status(500).send(error)
         })
       }else{  
         console.log('codg do produto já existe')  
@@ -43,19 +43,19 @@ router.post('/', (req, res) =>{
     })  
  })
 
-router.get('/', (req, res)=> {
+router.get('/', (req, res)=> {  
   Products.findOne({where: { //procura na tabela produto
-    codgProd: req.body.codgProd, //codg de barras
-  }}).then((product) =>{
-    if(product.codgProd === req.body.codgProd){
+    codgProd: req.query.codgProd, //codg de barras
+  }}).then((product) =>{   
+    if(product.codgProd === parseInt(req.query.codgProd)){
       return res.send({
-        nameProd: req.body.nameProd,
-        stockProd: req.body.stockProd,
-        priceProd: req.body.priceProd,
-        imageProd: req.body.imageProd,
-        previewProd: req.body.previewProd,
-        subdepartement: req.body.subdepartement,
-        codgProd: req.body.codgProd})
+        nameProd: product.nameProd,
+        stockProd: product.stockProd,
+        priceProd: product.priceProd,
+        imageProd: product.imageProd,
+        previewProd: product.previewProd,
+        subdepartement: product.subdepartement,
+        codgProd: product.codgProd})
     }else{
       return res.status(400).send('produto não existe')
     }              
@@ -69,18 +69,18 @@ router.put('/', (req, res) =>{
       codgProd: req.body.codgProd, //codg de barras
     }}).then((product) =>{
       if(product){
-        Products.update({
+        product.update({
           nameProd: req.body.nameProd,
           stockProd: req.body.stockProd,
           priceProd: req.body.priceProd,
           imageProd: req.body.imageProd,
           previewProd: req.body.previewProd,
-          subdepartement: req.body.subdepartement,
+          subdepartment: req.body.subdepartment,
           codgProd: req.body.codgProd
       }).then(()=>{
         return res.status(200).send('Produto alterado com sucesso')
       }).catch((error) =>{
-        return res.status(500).send('error não conseguiu alterar')
+        return res.status(500).send(error)
       })
       }else{         
         return res.status(400).send('codg do produto não existe')      
@@ -93,7 +93,9 @@ router.put('/', (req, res) =>{
 router.delete('/', (req, res)=> {
   Products.destroy({where: {
     codgProd: req.body.codgProd, //codg de barras
-  }}).catch((error) =>{
+  }}).then(()=>{
+    return res.status(200).send('Produto deletado com sucesso')
+  }).catch((error) =>{
     return res.status(500).send(error)
   })
 })

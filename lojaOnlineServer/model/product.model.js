@@ -1,9 +1,9 @@
-const Sequelize = require('sequelize');
 const db = require('../mysql/db')
  
 const Products = db.define('productTable', {
     productId: {
-        type: db.Sequelize.INTEGER, primaryKey: true
+        type: db.Sequelize.INTEGER, primaryKey: true,
+        autoIncrement: true
     },
     nameProd: {
         type: db.Sequelize.STRING
@@ -18,13 +18,13 @@ const Products = db.define('productTable', {
         type: db.Sequelize.BLOB('long')
     },
     previewProd: {
-        type: db.Sequelize.INTEGER
+        type: db.Sequelize.BIGINT
     },
     subdepartment: {
-        type: db.Sequelize.STRING
+        type: db.Sequelize.STRING, foreingkey: true
     },
     codgProd: {
-        type: db.Sequelize.INTEGER
+        type: db.Sequelize.BIGINT
     }  
 }, {
     timestamps: false,

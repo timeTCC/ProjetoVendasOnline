@@ -7,6 +7,7 @@ import './styles.css';
 const Menu = (props) => {
     const menuItens = [{
         page: 'Home',
+<<<<<<< HEAD
         link: '/admin/home'
     },
     {
@@ -20,6 +21,21 @@ const Menu = (props) => {
     {
         page: 'Pedidos',
         link: '/admin/pedidos'
+=======
+        link: 'home'
+    },
+    {
+        page: 'Produtos',
+        link: 'produtos'
+    },
+    {
+        page: 'Categorias',
+        link: 'categorias'
+    },
+    {
+        page: 'Pedidos',
+        link: 'pedidos'
+>>>>>>> origin/master
     }
 ]
     

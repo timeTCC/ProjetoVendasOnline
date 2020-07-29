@@ -10,7 +10,11 @@
 
 #admin-menu .admin-menu-title{
     margin-top: 0px;
+<<<<<<< HEAD
     margin-left: -40px;
+=======
+    margin-left: -20px;
+>>>>>>> origin/master
 }
 
 #admin-menu .admin-menu-opts{

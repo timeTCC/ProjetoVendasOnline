@@ -1,11 +1,17 @@
-import React, {useCallback, useState} from 'react'
+import React, {useCallback, useState, useEffect} from 'react'
 import {useDropzone} from 'react-dropzone'
 import { FiUpload } from 'react-icons/fi'
 import './style.css';
 
-const Dropzone = ({ onFileUploaded }) => {
+const Dropzone = ({ onFileUploaded, isImageSelected }) => {
 
   const [selectedImage, setSelectedImage] = useState('');
+
+  useEffect(()=>{
+    if(!isImageSelected){
+      setSelectedImage('');
+    }
+  },[isImageSelected]);
 
   const onDrop = useCallback((acceptedFiles) => {
       const reader = new FileReader()
@@ -41,7 +47,7 @@ const Dropzone = ({ onFileUploaded }) => {
               </p> :
               <p>
                   <FiUpload />
-                  Arraste ou clique para selecionar a imagem do produto
+                  Arraste ou clique para selecionar a imagem do produto {isImageSelected}
               </p>
           )
       }

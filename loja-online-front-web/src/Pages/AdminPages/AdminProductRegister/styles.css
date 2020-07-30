@@ -69,6 +69,10 @@
     outline: none;
 }
 
+#create-product form button .loading{
+    margin-left: calc(50% -20px);
+}
+
 #create-product form .input-set{
     height: auto;  
     width: 100%;
@@ -82,4 +86,6 @@
 #create-product form .input-set input[type='text']{
     width: 45%;
 }  
+
+
 

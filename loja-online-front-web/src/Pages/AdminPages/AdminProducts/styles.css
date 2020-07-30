@@ -1,0 +1,18 @@
+#page-admin-products .page-content{
+    margin-left: 200px;
+}
+
+#page-admin-products .page-content .add-product-card{
+    height: 240px;
+    width: 180px;
+    border-radius: 5px;
+
+    margin: 20px;
+
+    background-color: #C4C4C4;
+    cursor: pointer;
+}
+
+#page-admin-products .page-content .add-product-card .icon{
+    margin: 10px;
+}

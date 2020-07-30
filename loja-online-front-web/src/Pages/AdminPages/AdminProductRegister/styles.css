@@ -1,0 +1,91 @@
+#page-admin-producs-register .page-content{
+    margin-left: 200px;
+
+    height: calc(100vh - 165px);
+}   
+
+#create-product{
+    height: 90%;
+    width: 90%;
+
+    margin: auto;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    background: #FDFCFC;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#create-product form{
+    height: calc(100% - 40px);
+    width: 45%;
+
+    margin-top: 20px;
+    margin-left: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#create-product form input[type='text']{
+    height: 38px;
+    width: calc(100% - 10px);
+
+    margin: 10px 0px;
+
+    padding-left: 10px;
+}
+
+#create-product form textarea{
+    height: 38px;
+    width: calc(100% - 20px);
+    margin: 10px 0px;
+    padding: 10px;
+}
+
+#create-product form select{
+    height: 38px;
+    width: 100%;
+
+    margin: 10px 0px;
+
+    padding: 0px;
+    padding-left: 10px;
+}
+
+#create-product form button{
+    height: 50px;
+    width: 100%;
+    margin: 10px 0px;
+    padding: 0px;
+    padding-left: 10px;
+    background-color: #FF9F10;
+    color: #FDFCFC;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+#create-product form button .loading{
+    margin-left: calc(50% -20px);
+}
+
+#create-product form .input-set{
+    height: auto;  
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}  
+
+
+#create-product form .input-set input[type='text']{
+    width: 45%;
+}  
+
+
+

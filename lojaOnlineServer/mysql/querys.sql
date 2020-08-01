@@ -1,7 +1,7 @@
 -------------------Deletar DATABASES--------------
 DROP DATABASE lojaonline;
 
-DROP TABLE productTable;
+DROP TABLE usersTable;
 
 -------------------Criar DATABASES----------------
 CREATE DATABASE lojaOnline;
@@ -12,10 +12,10 @@ USE lojaOnline;
 -------------------Criar TABELA USERS-------------
 CREATE TABLE usersTable(
     userId INT AUTO_INCREMENT,
-    nameUser char(100) NOT NULL,
+    nameUser char(255) NOT NULL,
     cpfUser char(14) NOT NULL,
     phoneUser char(14) NOT NULL,
-    emailUser char(100) NOT NULL,
+    emailUser char(255) NOT NULL,
     passwordUser char(20) NOT NULL,
     profileUser char(20) NOT NULL,
     PRIMARY KEY (userId)
@@ -25,9 +25,9 @@ CREATE TABLE usersTable(
 CREATE TABLE addressTable(
     addressId INT AUTO_INCREMENT,
     zipCodeUser INT NOT NULL,
-    addressUser char(100) NOT NULL,
+    addressUser char(255) NOT NULL,
     numberAddressUser INT NOT NULL,
-    districtUser char(100) NOT NULL,
+    districtUser char(255) NOT NULL,
     cityUser char(50) NOT NULL,
     stateUser char(50) NOT NULL,
     userId INT NOT NULL,
@@ -38,8 +38,8 @@ CREATE TABLE addressTable(
 -------------------Criar TABELA ITENS DO SUBDEPARTAMENTO-----------
 CREATE TABLE subdepartmentTable(
     subdepartment char(50) NOT NULL,
-    department char(50) NOT NULL,    
-    PRIMARY KEY (subdepartment)    
+    department char(50),    
+    PRIMARY KEY (subdepartment)
 );
 
 -------------------Criar TABELA PRODUTO-------------
@@ -48,8 +48,8 @@ CREATE TABLE productTable(
     nameProd char(100) NOT NULL,
     stockProd INT NOT NULL,
     priceProd FLOAT NOT NULL,
-    imageProd LONGBLOB,
-    -- imageProd LONGBLOB NOT NULL, PARA TESTE NEM NOT NULL
+    -- imageProd LONGBLOB,
+    imageProd LONGBLOB NOT NULL,
     previewProd BIGINT NOT NULL,
     subdepartment char(50) NOT NULL,
     codgProd BIGINT NOT NULL,

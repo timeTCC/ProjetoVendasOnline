@@ -104,6 +104,7 @@ ADD descriptionProd char(150) NOT NULL;
 ALTER TABLE usersTable 
 DROP COLUMN profileUser;
 
+
 ALTER TABLE usersTable 
 DROP CONSTRAINT profileUser;
 

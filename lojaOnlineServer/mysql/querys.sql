@@ -36,7 +36,7 @@ CREATE TABLE addressTable(
 );
 
 -------------------Criar TABELA ITENS DO SUBDEPARTAMENTO-----------
-CREATE TABLE subdepartmentTable(
+CREATE TABLE categoryTable(
     subdepartment char(50) NOT NULL,
     department char(50),    
     PRIMARY KEY (subdepartment)
@@ -54,7 +54,7 @@ CREATE TABLE productTable(
     subdepartment char(50) NOT NULL,
     codgProd BIGINT NOT NULL,
     descriptionProd char(150) NOT NULL,   
-    FOREIGN KEY (subdepartment) REFERENCES subdepartmentTable(subdepartment),
+    FOREIGN KEY (subdepartment) REFERENCES categoryTable(subdepartment),
     PRIMARY KEY (productId)
 );
 
@@ -82,7 +82,7 @@ CREATE TABLE itemsRequestTable(
 SHOW TABLES;
 
 -------------------Select TABELAS-----------------
-SELECT * FROM productTable;
+SELECT * FROM categoryTable;
 
 -------------------Iserir na TABELA usuarios admin-
 INSERT INTO subdepartmentTable(subdepartment, department)

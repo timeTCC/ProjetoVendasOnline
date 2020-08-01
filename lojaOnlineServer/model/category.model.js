@@ -1,7 +1,6 @@
-const Sequelize = require('sequelize');
 const db = require('../mysql/db')
  
-const Subdepartment = db.define('subdepartmentTable', {
+const Category = db.define('categoryTable', {
     subdepartment: {
         type: db.Sequelize.STRING, primaryKey: true
     },
@@ -14,4 +13,4 @@ const Subdepartment = db.define('subdepartmentTable', {
 })
 
 //exporto o modulo 
-module.exports = Subdepartment;
+module.exports = Category;

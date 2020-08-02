@@ -37,9 +37,10 @@ CREATE TABLE addressTable(
 
 -------------------Criar TABELA ITENS DO SUBDEPARTAMENTO-----------
 CREATE TABLE categoryTable(
+    categoryId INT AUTO_INCREMENT,
     subdepartment char(50) NOT NULL,
     department char(50),    
-    PRIMARY KEY (subdepartment)
+    PRIMARY KEY (categoryId)
 );
 
 -------------------Criar TABELA PRODUTO-------------
@@ -53,8 +54,8 @@ CREATE TABLE productTable(
     previewProd BIGINT NOT NULL,
     subdepartment char(50) NOT NULL,
     codgProd BIGINT NOT NULL,
-    descriptionProd char(150) NOT NULL,   
-    FOREIGN KEY (subdepartment) REFERENCES categoryTable(subdepartment),
+    categoryId INT,   
+    FOREIGN KEY (categoryId) REFERENCES categoryTable(categoryId),
     PRIMARY KEY (productId)
 );
 

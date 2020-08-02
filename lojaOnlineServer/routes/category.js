@@ -54,6 +54,15 @@ router.get('/', (req, res)=> {
     })    
 })
 
-
+router.get('/', (req, res)=> {  
+    Category.findAll().then((list) => {
+        const categoryList = [];
+        categoryService.populateFistLevel(list, categoryList);
+        categoryList.forEach((category) => {
+            categoryService.findChildrenForFather(list, category);
+        });
+        res.send(categoryList);            
+    })    
+})
 
 module.exports = router;

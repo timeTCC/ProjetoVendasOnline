@@ -27,7 +27,7 @@ router.post('/', (req, res) =>{
             priceProd: req.body.priceProd,
             imageProd: req.body.imageProd,
             previewProd: req.body.previewProd,
-            subdepartment: req.body.subdepartment,
+            categoryId: req.body.categoryId,
             codgProd: req.body.codgProd,
             descriptionProd: req.body.descriptionProd
         }).then(()=>{
@@ -55,7 +55,7 @@ router.get('/', (req, res)=> {
         priceProd: product.priceProd,
         imageProd: product.imageProd,
         previewProd: product.previewProd,
-        subdepartement: product.subdepartement,
+        categoryId: product.categoryId,
         codgProd: product.codgProd,
         descriptionProd: req.body.descriptionProd})
     }else{
@@ -77,7 +77,7 @@ router.put('/', (req, res) =>{
           priceProd: req.body.priceProd,
           imageProd: req.body.imageProd,
           previewProd: req.body.previewProd,
-          subdepartment: req.body.subdepartment,
+          categoryId: req.body.categoryId,
           codgProd: req.body.codgProd,
           descriptionProd: req.body.descriptionProd
       }).then(()=>{

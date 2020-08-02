@@ -20,8 +20,8 @@ const Products = db.define('productTable', {
     previewProd: {
         type: db.Sequelize.BIGINT
     },
-    subdepartment: {
-        type: db.Sequelize.STRING, foreingkey: true
+    categoryId: {
+        type: db.Sequelize.INTEGER, foreingkey: true
     },
     codgProd: {
         type: db.Sequelize.BIGINT

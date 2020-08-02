@@ -52,9 +52,9 @@ CREATE TABLE productTable(
     -- imageProd LONGBLOB,
     imageProd LONGBLOB NOT NULL,
     previewProd BIGINT NOT NULL,
-    subdepartment char(50) NOT NULL,
+    categoryId INT,
     codgProd BIGINT NOT NULL,
-    categoryId INT,   
+    descriptionProd TEXT NOT NULL,   
     FOREIGN KEY (categoryId) REFERENCES categoryTable(categoryId),
     PRIMARY KEY (productId)
 );

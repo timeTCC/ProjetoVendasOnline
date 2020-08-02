@@ -54,10 +54,14 @@ router.get('/', (req, res)=> {
     })    
 })
 
-router.get('/', (req, res)=> {  
+router.get('/specificCategory', (req, res)=> {  
+    const categoryNameSubDepartment = req.query.department; //subdepartment; Filho   
     Category.findAll().then((list) => {
         const categoryList = [];
-        categoryService.populateFistLevel(list, categoryList);
+        categoryList.push({
+            categoryName: categoryNameSubDepartment,
+            subCategories: []
+        })
         categoryList.forEach((category) => {
             categoryService.findChildrenForFather(list, category);
         });

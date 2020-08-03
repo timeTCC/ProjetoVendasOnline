@@ -93,9 +93,11 @@ VALUES ('geladeiras', 'eletrodomesticos');
 
 DESCRIBE productTable;
 
+SELECT * FROM productTable;
+
 ---------------------Alterar a tabela modificando---------------
 ALTER TABLE productTable
-MODIFY COLUMN previewProd BIGINT NOT NULL;
+MODIFY COLUMN imageProd LONGBLOB;
 
 ---------------------Alterar a tabela acrescentando colunas----------
 ALTER TABLE productTable

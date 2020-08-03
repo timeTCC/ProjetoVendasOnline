@@ -21,7 +21,8 @@ const Products = db.define('productTable', {
         type: db.Sequelize.BIGINT
     },
     categoryId: {
-        type: db.Sequelize.INTEGER, foreingkey: true
+        type: db.Sequelize.INTEGER, foreingkey: true,
+        constraints: false
     },
     codgProd: {
         type: db.Sequelize.BIGINT

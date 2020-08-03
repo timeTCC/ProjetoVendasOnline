@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Category = require('../model/category.model');
 const categoryService = require('../service/category.service');
+const Products = require('../model/product.model');
 
 // subdepartment; Filho
 // department; PAI
@@ -68,5 +69,51 @@ router.get('/specificCategory', (req, res)=> {
         res.send(categoryList);            
     })    
 })
+
+router.delete('/', (req, res)=> {
+    const categoryNameSubDepartment = req.query.department;
+    Category.findOne({where: {
+        subdepartment: categoryNameSubDepartment,
+    }}).then((subdepartment) =>{
+        if(!subdepartment){
+            console.log('Categoria não existente')  
+            return res.status(400).send('Categoria não existente --- não pode ser excluido')    
+        }else{
+            Category.findAll({where: {
+                department: categoryNameSubDepartment, 
+            }}).then((childrenList) => {
+                if(childrenList.length === 0){
+                    Products.update({categoryId: null}, {where: {
+                        categoryId: subdepartment.categoryId,
+                    }}).then(() => {
+                        Category.destroy({where: {
+                            subdepartment: categoryNameSubDepartment, //codg de barras
+                        }}).then(()=>{
+                            return res.status(200).send('Categoria deletado com sucesso')    
+                        }).catch((error) =>{
+                            return res.status(500).send(error)
+                        })
+                    })                                        
+                }else{
+                    console.log('Categoria tem uma subcategoria')
+                    return res.status(400).send('Categoria não pode ser excluida é pai')
+                }                
+            })            
+            // if(categoryNameSubDepartment === department){
+            //     console.log('Categoria é pai')  
+            //     return res.status(400).send('Categoria não pode ser excluida é pai')
+            // }else{
+            //     Products.destroy({where: {
+            //         subdepartment: categoryNameSubDepartment, //codg de barras
+            //       }}).then(()=>{
+            //         return res.status(200).send('Produto deletado com sucesso')
+            //       }).catch((error) =>{
+            //         return res.status(500).send(error)
+            //       })
+            // }   
+        }
+    })    
+})
+
 
 module.exports = router;

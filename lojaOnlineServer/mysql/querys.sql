@@ -1,7 +1,7 @@
 -------------------Deletar DATABASES--------------
 DROP DATABASE lojaonline;
 
-DROP TABLE productTable;
+DROP TABLE usersTable;
 
 -------------------Criar DATABASES----------------
 CREATE DATABASE lojaOnline;
@@ -12,10 +12,10 @@ USE lojaOnline;
 -------------------Criar TABELA USERS-------------
 CREATE TABLE usersTable(
     userId INT AUTO_INCREMENT,
-    nameUser char(100) NOT NULL,
+    nameUser char(255) NOT NULL,
     cpfUser char(14) NOT NULL,
     phoneUser char(14) NOT NULL,
-    emailUser char(100) NOT NULL,
+    emailUser char(255) NOT NULL,
     passwordUser char(20) NOT NULL,
     profileUser char(20) NOT NULL,
     PRIMARY KEY (userId)
@@ -25,9 +25,9 @@ CREATE TABLE usersTable(
 CREATE TABLE addressTable(
     addressId INT AUTO_INCREMENT,
     zipCodeUser INT NOT NULL,
-    addressUser char(100) NOT NULL,
+    addressUser char(255) NOT NULL,
     numberAddressUser INT NOT NULL,
-    districtUser char(100) NOT NULL,
+    districtUser char(255) NOT NULL,
     cityUser char(50) NOT NULL,
     stateUser char(50) NOT NULL,
     userId INT NOT NULL,
@@ -36,10 +36,11 @@ CREATE TABLE addressTable(
 );
 
 -------------------Criar TABELA ITENS DO SUBDEPARTAMENTO-----------
-CREATE TABLE subdepartmentTable(
+CREATE TABLE categoryTable(
+    categoryId INT AUTO_INCREMENT,
     subdepartment char(50) NOT NULL,
-    department char(50) NOT NULL,    
-    PRIMARY KEY (subdepartment)    
+    department char(50),    
+    PRIMARY KEY (categoryId)
 );
 
 -------------------Criar TABELA PRODUTO-------------
@@ -48,13 +49,13 @@ CREATE TABLE productTable(
     nameProd char(100) NOT NULL,
     stockProd INT NOT NULL,
     priceProd FLOAT NOT NULL,
-    imageProd LONGBLOB,
-    -- imageProd LONGBLOB NOT NULL, PARA TESTE NEM NOT NULL
+    -- imageProd LONGBLOB,
+    imageProd LONGBLOB NOT NULL,
     previewProd BIGINT NOT NULL,
-    subdepartment char(50) NOT NULL,
+    categoryId INT,
     codgProd BIGINT NOT NULL,
-    descriptionProd char(150) NOT NULL,   
-    FOREIGN KEY (subdepartment) REFERENCES subdepartmentTable(subdepartment),
+    descriptionProd TEXT NOT NULL,   
+    FOREIGN KEY (categoryId) REFERENCES categoryTable(categoryId),
     PRIMARY KEY (productId)
 );
 
@@ -82,7 +83,7 @@ CREATE TABLE itemsRequestTable(
 SHOW TABLES;
 
 -------------------Select TABELAS-----------------
-SELECT * FROM productTable;
+SELECT * FROM categoryTable;
 
 -------------------Iserir na TABELA usuarios admin-
 INSERT INTO subdepartmentTable(subdepartment, department)
@@ -92,9 +93,11 @@ VALUES ('geladeiras', 'eletrodomesticos');
 
 DESCRIBE productTable;
 
+SELECT * FROM productTable;
+
 ---------------------Alterar a tabela modificando---------------
 ALTER TABLE productTable
-MODIFY COLUMN previewProd BIGINT NOT NULL;
+MODIFY COLUMN imageProd LONGBLOB;
 
 ---------------------Alterar a tabela acrescentando colunas----------
 ALTER TABLE productTable
@@ -103,6 +106,7 @@ ADD descriptionProd char(150) NOT NULL;
 ---------------------Alterar a tabela excluindo colunas----------
 ALTER TABLE usersTable 
 DROP COLUMN profileUser;
+
 
 ALTER TABLE usersTable 
 DROP CONSTRAINT profileUser;

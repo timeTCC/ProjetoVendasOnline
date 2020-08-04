@@ -10,15 +10,15 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 var usersRouter = require('./routes/users');
 const productRouter = require('./routes/product');
+const categoryRouter = require('./routes/category');
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors({credentials: true, origin: 'http://localhost:3030'}));
 app.use('/users', usersRouter);
 app.use('/product', productRouter);
+app.use('/category', categoryRouter);
 
 module.exports = app;
 

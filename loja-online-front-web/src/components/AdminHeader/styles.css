@@ -41,7 +41,7 @@
     width: 350px;
 
     margin-top: 10px;
-    margin-right: 100px;
+    margin-left: calc(100% - 500px);
 
     justify-content: space-around;
 }

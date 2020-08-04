@@ -41,10 +41,6 @@ const AdminProductRegister = () => {
             return () => clearTimeout(timer);
         }
 
-        if(formData.subdepartment === undefined){
-
-        }
-
         await api.post('product', formData).then((response)=>{
             isButtonLoading(false);
 

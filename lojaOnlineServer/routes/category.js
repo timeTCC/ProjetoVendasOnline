@@ -70,6 +70,12 @@ router.get('/specificCategory', (req, res)=> {
     })    
 })
 
+router.get('/categoryList', (req, res)=> { 
+    Category.findAll().then((categoryList) => {            
+        res.send(categoryList);            
+    })    
+})
+
 router.delete('/', (req, res)=> {
     const categoryNameSubDepartment = req.query.department;
     Category.findOne({where: {

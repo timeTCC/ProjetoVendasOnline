@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Products = require('../model/product.model')
+const Products = require('../model/product.model');
+const Category = require('../model/category.model');
 //const formidable = require('formidable');
 
 // productId: integer;      
@@ -17,34 +18,45 @@ router.post('/', (req, res) =>{
   //   console.log(json(fields));
   //   res.json({ fields, files });
   // });
-    Products.findOne({where: { //procura na tabela produto
-      codgProd: req.body.codgProd, //codg de barras
-    }}).then((product) =>{
-      if(!product){// se na tabela não ouver nenhum produto como o mesmo codg de barras entao ele cria um novo
-        Products.create({// é criado na tabela
-            nameProd: req.body.nameProd,
-            stockProd: req.body.stockProd,
-            priceProd: req.body.priceProd,
-            imageProd: req.body.imageProd,
-            previewProd: req.body.previewProd,
-            categoryId: req.body.categoryId,
-            codgProd: req.body.codgProd,
-            descriptionProd: req.body.descriptionProd
-        }).then(()=>{
-          return res.status(201).send('Produto criado com sucesso')
-        }).catch((error) =>{
-          return res.status(500).send(error)
-        })
-      }else{  
-        console.log('codg do produto já existe')  
-        return res.status(400).send('codg do produto já existe')      
-      }
-    }).catch((error) =>{
-      return res.status(500).send('error não procurou na tabela')
-    })  
+  Category.findOne({where: {    
+    categoryId: req.body.categoryId,
+  }}).then((category) =>{    
+    console.log(category)    
+    if(category){
+      Products.findOne({where: { //procura na tabela produto
+        codgProd: req.body.codgProd, //codg de barras
+      }}).then((product) =>{
+        if(!product){// se na tabela não ouver nenhum produto como o mesmo codg de barras entao ele cria um novo
+          Products.create({// é criado na tabela
+              nameProd: req.body.nameProd,
+              stockProd: req.body.stockProd,
+              priceProd: req.body.priceProd,
+              imageProd: req.body.imageProd,
+              previewProd: req.body.previewProd,
+              categoryId: req.body.categoryId,
+              codgProd: req.body.codgProd,
+              descriptionProd: req.body.descriptionProd
+          }).then(()=>{
+            return res.status(201).send('Produto criado com sucesso')
+          }).catch((error) =>{
+            return res.status(500).send(error)
+          })
+        }else{  
+          console.log('codg do produto já existe')  
+          return res.status(400).send('codg do produto já existe')      
+        }
+      }).catch((error) =>{
+        return res.status(500).send('error não procurou na tabela')
+      })
+    }else{
+      return res.status(400).send('não existe o ID da categoria')
+    }
+  }).catch((error) =>{
+    return res.status(500).send('error não procurou na tabela1')
+  })      
  })
 
-router.get('/', (req, res)=> {  
+router.get('/findByCodg', (req, res)=> {  
   Products.findOne({where: { //procura na tabela produto
     codgProd: req.query.codgProd, //codg de barras
   }}).then((product) =>{   
@@ -57,7 +69,7 @@ router.get('/', (req, res)=> {
         previewProd: product.previewProd,
         categoryId: product.categoryId,
         codgProd: product.codgProd,
-        descriptionProd: req.body.descriptionProd})
+        descriptionProd: product.descriptionProd})
     }else{
       return res.status(400).send('produto não existe')
     }              
@@ -65,6 +77,19 @@ router.get('/', (req, res)=> {
     return res.status(500).send(error)
   })
 })
+
+router.get('/findByCategory', (req, res)=> {  
+  const value = req.query.categoryId === 'null' ? null : req.query.categoryId;
+  console.log(req.query.categoryId)
+  Products.findAll({where: { //procura na tabela produto
+    categoryId: value, 
+  }}).then((productList) =>{          
+    res.send(productList)            
+  }).catch((error) =>{
+    return res.status(500).send(error)
+  })
+})
+
 
 router.put('/', (req, res) =>{
     Products.findOne({where: { //procura na tabela produto

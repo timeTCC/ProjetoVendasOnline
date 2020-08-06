@@ -44,7 +44,7 @@
     background-color: #FF9F10;
     margin-left: 5px;
     border-radius: 5px;
-    
+    cursor: pointer;
 }
 
 #page-admin-categories .delete-button svg{

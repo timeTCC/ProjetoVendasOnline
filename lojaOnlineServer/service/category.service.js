@@ -2,6 +2,7 @@ function populateFistLevel(list, categoryList) {
     list.forEach((categoryInList) => {
         if(!categoryInList.department){
             categoryList.push({
+                categoryId: categoryInList.categoryId,
                 categoryName: categoryInList.subdepartment,
                 subCategories: []
             })
@@ -15,6 +16,7 @@ function findChildrenForFather(list, category) {
     list.forEach((categoryInList) => {
         if(categoryInList.department === category.categoryName) {
             category.subCategories.push({
+                categoryId: categoryInList.categoryId,
                 categoryName: categoryInList.subdepartment,
                 subCategories: [],
             })

@@ -44,7 +44,7 @@ router.post('/', (req, res) =>{
     })  
  })
 
-router.get('/', (req, res)=> {  
+router.get('/findByCodg', (req, res)=> {  
   Products.findOne({where: { //procura na tabela produto
     codgProd: req.query.codgProd, //codg de barras
   }}).then((product) =>{   
@@ -57,7 +57,7 @@ router.get('/', (req, res)=> {
         previewProd: product.previewProd,
         categoryId: product.categoryId,
         codgProd: product.codgProd,
-        descriptionProd: req.body.descriptionProd})
+        descriptionProd: product.descriptionProd})
     }else{
       return res.status(400).send('produto não existe')
     }              
@@ -65,6 +65,19 @@ router.get('/', (req, res)=> {
     return res.status(500).send(error)
   })
 })
+
+router.get('/findByCategory', (req, res)=> {  
+  const value = req.query.categoryId === 'null' ? null : req.query.categoryId;
+  console.log(req.query.categoryId)
+  Products.findAll({where: { //procura na tabela produto
+    categoryId: value, 
+  }}).then((productList) =>{          
+    res.send(productList)            
+  }).catch((error) =>{
+    return res.status(500).send(error)
+  })
+})
+
 
 router.put('/', (req, res) =>{
     Products.findOne({where: { //procura na tabela produto

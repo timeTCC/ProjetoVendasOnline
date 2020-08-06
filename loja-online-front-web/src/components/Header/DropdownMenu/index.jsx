@@ -1,15 +1,13 @@
 import React, {useState, useEffect, useRef} from 'react';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import Axios from 'axios';
-import ReactLoading from 'react-loading'
 
+import api from '../../../services/api';
 import Loading from '../../Loading';
 
 import './styles.css';
 
 const DropdownMenu = () => {
-    const api = Axios;
-
     const [isExpended, setIsExpended] = useState(false);
     const [chevronIcon, setChevronIcon] = useState();
     const [categories, setCategories] = useState([]);
@@ -18,7 +16,7 @@ const DropdownMenu = () => {
     
 
     useEffect(()=>{
-        api.get('https://jsonbox.io/box_8590a2b9c900cbc98925')
+        api.get('/category')
                 .then((response)=>{
                     //console.log(response.data)
                     setCategories(response.data);

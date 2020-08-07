@@ -5,12 +5,14 @@ import Dropzone from '../../../components/Dropzone';
 import ReactLoading from 'react-loading';
 
 import api from '../../../services/api';
+import Loading from '../../../components/Loading';
 
 import './styles.css';
 
 const AdminProductRegister = () => {
     const [ loadingButton, setLoadingButton ] = useState('Cadastrar');
     const [ isImageSelected, setIsImageSelected] = useState(true);
+    const [ categories, setCategories ] = useState([]);
 
     const [selectedFile, setSelectedFile] = useState();
     const [formData, setFormData] = useState({
@@ -20,7 +22,7 @@ const AdminProductRegister = () => {
         "priceProd": Float32Array,
         "imageProd": String,
         "previewProd": 0,
-        "subdepartment": String,
+        "categoryId": Int16Array,
         "codgProd": Int16Array
     });
 
@@ -91,22 +93,32 @@ const AdminProductRegister = () => {
         setFormData({ ...formData, [name]: value});
     }
 
-    useEffect(()=>{
-        setFormData({ ...formData, "imageProd": selectedFile});
-        setIsImageSelected(true);
-    },[selectedFile]);
-
     function isButtonLoading(loading){
         if(loading){
             setLoadingButton(
                 <div className='loading'>
-                    <ReactLoading type='spin' height={'20%'} width={'20%'} />
+                    <Loading color='white' size={30} />
                 </div>
             );
         } else {
             setLoadingButton('Entrar');
         }
     }
+    
+    useEffect(()=>{
+        setFormData({ ...formData, "imageProd": selectedFile});
+        setIsImageSelected(true);
+    },[selectedFile]);
+
+    useEffect(()=>{
+        api.get('/category/categoryList')
+        .then(res=>{
+            setCategories(res.data);
+        })
+        .catch(error=>{
+            setCategories('Erro ao carregar categorias');
+        })
+    },[]);
 
     return(
         <div id="page-admin-producs-register">
@@ -125,9 +137,15 @@ const AdminProductRegister = () => {
                             <input type="text" name="stockProd" placeholder="Qtd em estoque" onChange={handleInputChange} />
                         </div>
 
-                        <select required name="subdepartment" onChange={handleInputChange}>
+                        <select required name="categoryId" onChange={handleInputChange}>
                             <option value="">Selecione um departamento ...</option>
-                            <option value="geladeiras">Geladeiras</option>
+                            {
+                                categories.map(category=>{
+                                    return(
+                                        <option key={category.categoryId} value={category.categoryId}>{category.subdepartment}</option>
+                                    )
+                                })
+                            }
                         </select>
 
                         <button required type="submit">{loadingButton}</button>

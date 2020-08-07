@@ -40,7 +40,7 @@ const Header = (props) => {
 
     if(isLogded){
         return(
-            <header className='opener'>
+            <header id='admin-header' className='opener'>
                 <div className="wrapper">
                     <div className="content">
                         <Menu page={props.page}/>
@@ -70,7 +70,7 @@ const Header = (props) => {
         )
     } else {
         return(
-            <header className='opener'>
+            <header id='admin-header' className='opener'>
                 <div className="wrapper">
                     <div className="content">
                         <h1 className='title'>Loja Online</h1>

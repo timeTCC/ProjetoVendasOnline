@@ -27,7 +27,7 @@ const Header = () => {
     }, [userName]);
 
     return(
-        <header className='opener'>
+        <header id='client-header' className='opener'>
             <div className="wrapper">
                 <div className="content">
 

@@ -12,7 +12,7 @@ const AdminLogin = () => {
     const [ formData, setFormData ] = useState({ emailUser: String, passwordUser: String });
     const [ loginStatus, setLoginStatus ] = useState(' ');
     const [ loadingButton, setLoadingButton ] = useState('Entrar');
-    const [cookies, setCookie, removeCookie] = useCookies(['userAdminName']);
+    const [ cookies, setCookie, removeCookie ] = useCookies(['userAdminName']);
 
     const history = useHistory();
 

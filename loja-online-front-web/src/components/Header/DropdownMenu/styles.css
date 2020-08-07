@@ -37,11 +37,6 @@
     border-radius: 5px;
 }
 
-#dropdown-menu .categories .loading{
-    margin: 10px;
-    margin-left: 85px;
-}
-
 #dropdown-menu .category{
     width: 190px;
     background-color: #FDB446;

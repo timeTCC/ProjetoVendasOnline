@@ -1,0 +1,167 @@
+/* Configurações da pagina */
+#page-admin-categories .page-content{
+    margin-left: 200px;
+    height: calc(100vh - 165px);
+}
+
+#page-admin-categories .page-content h1{
+    margin-left: 60px;
+}
+
+#page-admin-categories .page-content hr{
+    width: calc(100% - 80px);
+    margin: 10px auto 50px;
+    border: solid 1px;
+}
+
+/* Configurações dos cards de categorias raiz */
+#page-admin-categories .category-container{
+    height: auto;
+    width: calc(80% - 50px);
+    margin: 10px auto;
+    background-color: #FDB446;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;  
+    color: #FDFCFC;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+} 
+
+/* Configurações das categorias raiz */
+#page-admin-categories .root-category-title{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+} 
+
+#page-admin-categories .delete-button{
+    height: 20px;
+    width: 20px;
+    background-color: #FF9F10;
+    margin-left: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#page-admin-categories .delete-button svg{
+    margin-left: 4px;
+}
+
+/* Configurações das subcategorias */
+#page-admin-categories .sub-category{
+    margin-top: 0px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    border: solid 1px #FF9F10;
+}
+
+#page-admin-categories .sub-category .sub-category-title{
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+}
+
+/* Configuração do form de adição de subcategorias */
+#page-admin-categories .add-category{
+    width: 200px;
+    height: 30px;
+    margin: 10px 20px;
+    background-color: #FF9F10;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0px;
+}
+
+#page-admin-categories .add-category form{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#page-admin-categories .add-category input{
+    margin: auto 0px;
+    height: calc(100% - 5px);
+    background-color: #FF9F10;
+    border: none;
+    color: #FDFCFC;
+    padding-left: 5px;
+}
+
+#page-admin-categories .add-category input:focus{
+    outline: none;
+}
+
+#page-admin-categories .add-category button{
+    background-color: #FF9F10;
+    border: none;
+    color: #FDFCFC;
+    margin-right: 5px;
+}
+
+#page-admin-categories .add-category button:focus{
+    outline: none;
+}
+
+#page-admin-categories .add-category svg{
+    margin-top: 4px;
+}
+
+/* Estilos do botão de adição de categoriass raiz */
+#page-admin-categories .add-root-category{
+    width: calc(100% - 40px);
+    height: 30px;
+    margin: 20px auto;
+    background-color: #FF9F10;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0px;
+}
+
+#page-admin-categories .add-root-category form{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#page-admin-categories .add-root-category input{
+    margin: auto 0px;
+    height: calc(100% - 4px);
+    background-color: #FF9F10;
+    padding-left: 5px;
+    border: none;
+    color: #FDFCFC;
+}
+
+#page-admin-categories .add-root-category input:focus{
+    outline: none;
+}
+
+#page-admin-categories .add-root-category button{
+    background-color: #FF9F10;
+    border: none;
+    color: #FDFCFC;
+    margin-right: 5px;
+}
+
+#page-admin-categories .add-root-category button:focus{
+    outline: none;
+}
+
+#page-admin-categories .add-root-category svg{
+    margin-top: 4px;
+}
+
+
+

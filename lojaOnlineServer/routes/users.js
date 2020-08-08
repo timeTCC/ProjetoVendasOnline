@@ -12,7 +12,7 @@ router.post('/authenticate', (req, res) =>{  //validação do usuario no BD
       return res.status(404).send('user not found') //caso não encontre o usuario volta erro 400 "usuario nao encontrado"
     }
     if(user.passwordUser === CriptografiaService.criptografar(req.body.passwordUser)){ //verificação da senha
-      return res.send({user: user.nameUser, cpf: user.cpfUser, phone: user.phoneUser, email: user.emailUser, profile: user.profileUser }) //caso encontre o usuario eu retorno o usuario para o front
+      return res.send({user: user.nameUser, cpf: user.cpfUser, phone: user.phoneUser, email: user.emailUser, passaword: user.passwordUser, profile: user.profileUser }) //caso encontre o usuario eu retorno o usuario para o front
     }else{
       return res.status(400).send('invalid password') //senha invalida erro 400
     }

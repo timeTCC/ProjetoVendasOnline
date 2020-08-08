@@ -2,7 +2,7 @@ const crypto = require("crypto");
 
 const DADOS_CRIPTOGRAFAR = {
   algoritmo : "aes256",
-  segredo : "chaves",
+  segredo : "OEXcKw_d3aOrMucGxwHCHw",
   tipo : "hex"
 };
 

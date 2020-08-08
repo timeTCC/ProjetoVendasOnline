@@ -91,13 +91,15 @@ VALUES ('geladeiras', 'eletrodomesticos');
 
 ---------------------mostrar a estrutura da tabela---------------
 
-DESCRIBE productTable;
+DESCRIBE usersTable;
 
 SELECT * FROM productTable;
 
+SELECT * FROM usersTable;
+
 ---------------------Alterar a tabela modificando---------------
-ALTER TABLE productTable
-MODIFY COLUMN imageProd LONGBLOB;
+ALTER TABLE usersTable
+MODIFY COLUMN passwordUser char(255) NOT NULL;
 
 ---------------------Alterar a tabela acrescentando colunas----------
 ALTER TABLE productTable

@@ -7,15 +7,15 @@ const DADOS_CRIPTOGRAFAR = {
 };
 
 
-function criptografar(password) {   
+function criptografar(data) {   
     const cipher = crypto.createCipher(DADOS_CRIPTOGRAFAR.algoritmo, DADOS_CRIPTOGRAFAR.segredo); 
-    cipher.update(password);
+    cipher.update(data);
     return cipher.final(DADOS_CRIPTOGRAFAR.tipo);
 };
 
-function descriptografar(password) {
+function descriptografar(data) {
     const decipher = crypto.createDecipher(DADOS_CRIPTOGRAFAR.algoritmo, DADOS_CRIPTOGRAFAR.segredo);
-    decipher.update(password, DADOS_CRIPTOGRAFAR.tipo);
+    decipher.update(data, DADOS_CRIPTOGRAFAR.tipo);
     return decipher.final();
 };
 

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Users = require('../model/users.model');
+const CriptografiaService = require('../service/criptografia.service');
 
 //aqui recebo as informações do front e respondo com sucesso ou erro
 router.post('/authenticate', (req, res) =>{  //validação do usuario no BD
@@ -10,8 +11,8 @@ router.post('/authenticate', (req, res) =>{  //validação do usuario no BD
     if(!user){
       return res.status(404).send('user not found') //caso não encontre o usuario volta erro 400 "usuario nao encontrado"
     }
-    if(user.passwordUser === req.body.passwordUser){ //verificação da senha
-      return res.send({user: user.nameUser, cpf: user.cpfUser, phone: user.phoneUser, email: user.emailUser, profile: user.profileUser }) //caso encontre o usuario eu retorno o usuario para o front
+    if(user.passwordUser === CriptografiaService.criptografar(req.body.passwordUser)){ //verificação da senha
+      return res.send({user: user.nameUser, cpf: user.cpfUser, phone: user.phoneUser, email: user.emailUser, passaword: user.passwordUser, profile: user.profileUser }) //caso encontre o usuario eu retorno o usuario para o front
     }else{
       return res.status(400).send('invalid password') //senha invalida erro 400
     }
@@ -30,7 +31,7 @@ router.post('/create', (req, res) =>{//endereço register
         cpfUser: req.body.cpfUser,
         phoneUser: req.body.phoneUser,
         emailUser: req.body.emailUser, 
-        passwordUser: req.body.passwordUser,
+        passwordUser: CriptografiaService.criptografar(req.body.passwordUser),
         profileUser: req.body.profileUser       
       }).then(()=>{
         return res.status(201).send('usuário criado com sucesso')

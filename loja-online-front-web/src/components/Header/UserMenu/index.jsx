@@ -27,22 +27,22 @@ const UserMenu = () => {
 		//     setIsLoged(false);
 		// }
 
-		const userToken = JSON.parse(localStorage.getItem('@loja-online/userToken'));
+		///const userToken = JSON.parse(localStorage.getItem('@loja-online/userToken'));
 
-		if (userToken) {
+		// if (userToken) {
 			
-			let name = userToken.user;
-			let firstName = name.split(" ");
-			firstName = firstName[0];
+		// 	let name = userToken.user;
+		// 	let firstName = name.split(" ");
+		// 	firstName = firstName[0];
 
-				setUserName(firstName);
+		// 		setUserName(firstName);
 
-			console.log(userToken);
+		// 	console.log(userToken);
 
-			setIsLoged(true);
-		} else {
-			setIsLoged(false);
-		}
+		// 	setIsLoged(true);
+		// } else {
+		// 	setIsLoged(false);
+		// }
 
 	}, []);
 

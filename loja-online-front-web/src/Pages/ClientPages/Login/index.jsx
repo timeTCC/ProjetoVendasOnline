@@ -3,10 +3,11 @@ import { useHistory } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
 import ReactLoading from 'react-loading';
 
-import './styles.css';
-
 import api from '../../../services/api';
 import Header from '../../../components/Header';
+import { encryptLocalStorage } from '../../../services/localStorageCrypt';
+
+import './styles.css';
 
 const Login = () => {
 	const [formData, setFormData] = useState({ emailUser: String, passwordUser: String });
@@ -25,15 +26,12 @@ const Login = () => {
 
 		await api.post('users/authenticate', formData).then(response => {
 			const userToken = JSON.stringify(response.data)
+			
+			encryptLocalStorage('@loja-online/userToken', userToken);
+
 			setLoginStatus(' ');
-			//cookies.set('userName', response.data.user, { path: '/' });
-
-			console.log(userToken);
-
-			localStorage.setItem('@loja-online/userToken', userToken);
-
 			isButtonLoading(false);
-			history.push('/');
+			//history.push('/');
 		}).catch(error => {
 			switch (error.response.status) {
 				case 400:

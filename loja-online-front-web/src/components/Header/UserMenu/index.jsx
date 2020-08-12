@@ -1,50 +1,76 @@
 import React, { useState, useEffect } from 'react';
 import { FiUser, FiChevronDown, FiChevronUp, FiHeart, FiShoppingBag, FiLogOut, FiArrowRight } from 'react-icons/fi';
-import { useHistory, Link } from 'react-router-dom';
-import { Cookies } from 'react-cookie';
+import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { login, logout } from '../../../services/actions';
+import { decriptLocalStorage } from '../../../utils/cryptFunctions';
+import { userTokenAuthentication } from '../../../utils/userFunctions';
+import api from '../../../services/api';
 
 import './styles.css';
 
 const UserMenu = () => {
 	const [isLoged, setIsLoged] = useState(false);
-	const [userName, setUserName] = useState('');
 	const [isExtend, setIsExtend] = useState(false);
 	const [chevron, setChevron] = useState(<FiChevronDown size={24} />);
+	const userToken = useSelector(state => state.user);
+	const [userName, setUserName] = useState();
+	
+	const dispatch = useDispatch();
 
-	const cookies = new Cookies;
+	function handleMenuExtend() {
+		(isExtend) ? setIsExtend(false) : setIsExtend(true);
+	}
+
+	function handleLogOut() {
+		localStorage.removeItem('@loja-online/userToken');
+		//setUserToken(undefined);
+		dispatch(logout());
+		setIsLoged(false);
+	}
 
 	useEffect(() => {
-		// Salvando dados do usuario usando cookies
-		// if(cookies.get('userName')){
-		//     let name = cookies.get('userName');
-		//     let firstName = name.split(" ");
+		const encryptedUserToken = localStorage.getItem('@loja-online/userToken');
 
-		//     firstName = firstName[0];
+		if (encryptedUserToken) {
+			decriptLocalStorage('@loja-online/userToken').then(res => {
+				const user = res;
+				console.log(res);
 
-		//     setUserName(firstName);
-		//     setIsLoged(true);
-		// } else {
-		//     setIsLoged(false);
-		// }
-
-		///const userToken = JSON.parse(localStorage.getItem('@loja-online/userToken'));
-
-		// if (userToken) {
-			
-		// 	let name = userToken.user;
-		// 	let firstName = name.split(" ");
-		// 	firstName = firstName[0];
-
-		// 		setUserName(firstName);
-
-		// 	console.log(userToken);
-
-		// 	setIsLoged(true);
-		// } else {
-		// 	setIsLoged(false);
-		// }
-
+				userTokenAuthentication(user).then(res => {
+					if(res){
+						console.log("logado")
+						dispatch(login(user));
+					} else {
+						dispatch(logout());
+					}
+				});
+			});
+		} else {
+			console.log('usuario não logado');
+		}
+		
 	}, []);
+
+	
+	useEffect(() => {
+		if(userToken !== null){
+			setIsLoged(true);
+		} else {
+			setIsLoged(false);
+		}
+	}, [userToken]);
+
+	useEffect(() => {
+		if(isLoged){
+			let userName = userToken.user;
+			userName = userName.split(" ");
+			userName = userName[0];
+
+			setUserName(userName);
+		}
+	}, [isLoged]);
 
 	useEffect(() => {
 		if (isExtend) {
@@ -54,15 +80,6 @@ const UserMenu = () => {
 		}
 	}, [isExtend]);
 
-	function handleMenuExtend() {
-		(isExtend) ? setIsExtend(false) : setIsExtend(true);
-	}
-
-	function handleLogOut() {
-		localStorage.removeItem('@loja-online/userToken');
-		setUserName('');
-		setIsLoged(false);
-	}
 
 	if (!isLoged) {
 		return (

@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Cookies } from 'react-cookie';
 import ReactLoading from 'react-loading';
+import { useDispatch } from 'react-redux';
 
 import api from '../../../services/api';
 import Header from '../../../components/Header';
-import { encryptLocalStorage } from '../../../services/localStorageCrypt';
+import { login } from '../../../services/actions';
 
 import './styles.css';
 
@@ -15,7 +15,27 @@ const Login = () => {
 	const [loadingButton, setLoadingButton] = useState('Entrar');
 
 	const history = useHistory();
-	const cookies = new Cookies;
+	const dispatch = useDispatch();
+
+	async function encryptLocalStorage(key, value){
+		var toEncrypt = value.replace(/"/g, "'");
+	
+		const data = {
+			data: toEncrypt
+		}
+	
+		console.log(data.data);
+	
+		await api.post('/criptografia/encriptografar', data)
+			.then(res => {
+				const token = res.data;
+				console.log(token);
+				localStorage.setItem(key, token);
+			})
+			.catch(error => {
+				console.log(error);
+			})
+	}
 
 	async function handleSubmit(event) {
 		event.preventDefault();
@@ -26,12 +46,14 @@ const Login = () => {
 
 		await api.post('users/authenticate', formData).then(response => {
 			const userToken = JSON.stringify(response.data)
-			
-			encryptLocalStorage('@loja-online/userToken', userToken);
 
+			encryptLocalStorage('@loja-online/userToken', userToken);
+			dispatch(login(response.data));
+			
 			setLoginStatus(' ');
 			isButtonLoading(false);
-			//history.push('/');
+
+			history.push('/');
 		}).catch(error => {
 			switch (error.response.status) {
 				case 400:

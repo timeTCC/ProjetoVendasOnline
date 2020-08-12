@@ -3,10 +3,14 @@ import { useHistory } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import ReactLoading from 'react-loading';
 
-import './styles.css';
-
 import api from '../../../services/api';
 import GenericHeader from '../../../components/GenericHeader';
+
+// React Redux, função atualiza um estado disponivel em toda aplicação
+import { useDispatch } from 'react-redux';
+import { login } from '../../../services/actions'
+
+import './styles.css';
 
 const AdminLogin = () => {
     const [ formData, setFormData ] = useState({ emailUser: String, passwordUser: String });
@@ -14,6 +18,7 @@ const AdminLogin = () => {
     const [ loadingButton, setLoadingButton ] = useState('Entrar');
     const [ cookies, setCookie, removeCookie ] = useCookies(['userAdminName']);
 
+    const dispatch = useDispatch();
     const history = useHistory();
 
     useEffect(()=>{
@@ -24,18 +29,20 @@ const AdminLogin = () => {
 
     async function handleSubmit(event){
         event.preventDefault();
-
-        console.log(formData);
-
         isButtonLoading(true);
 
         await api.post('users/authenticate', formData).then(response => {
             if(response.data.profile === "admin"){
-                setLoginStatus(' ');
-                setCookie('userAdminName', response.data.user, { path: '/' })
+                const user = response.data;
 
+                console.log(user);
+
+                setLoginStatus(' ');
                 isButtonLoading(false);
 
+                dispatch(login(user));
+
+                setCookie('userAdminName', response.data.user, { path: '/' })
                 history.push('/admin/home');
             } else {
                 setLoginStatus('Usuário não tem permissões de administrador');

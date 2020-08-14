@@ -21,6 +21,9 @@ CREATE TABLE usersTable(
     PRIMARY KEY (userId)
 );
 
+INSERT INTO usersTable(nameUser, cpfUser, phoneUser, emailUser, passwordUser, profileUser)
+VALUES ('kakinha', '41846625889', '1198989898', 'kakinha@kakinha.com', 'kakinha123', 'client');
+
 -------------------Criar TABELA ENDEREÇO-------------
 CREATE TABLE addressTable(
     addressId INT AUTO_INCREMENT,
@@ -86,7 +89,7 @@ SHOW TABLES;
 SELECT * FROM categoryTable;
 
 -------------------Iserir na TABELA usuarios admin-
-INSERT INTO subdepartmentTable(subdepartment, department)
+INSERT INTO usersTable(subdepartment, department)
 VALUES ('geladeiras', 'eletrodomesticos');
 
 ---------------------mostrar a estrutura da tabela---------------

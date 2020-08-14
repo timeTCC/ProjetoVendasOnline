@@ -16,8 +16,6 @@ const Header = () => {
 
     function handleSearch(event) {
         event.preventDefault();
-
-        console.log('pesquisa');
     }
 
     useEffect(()=>{

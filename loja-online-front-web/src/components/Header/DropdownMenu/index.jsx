@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import { useHistory } from 'react-router-dom';
 import Axios from 'axios';
 
 import api from '../../../services/api';
@@ -13,7 +14,7 @@ const DropdownMenu = () => {
     const [categories, setCategories] = useState([]);
     const [categoriesDOM, setCategoriesDOM] = useState(<Loading color='#fff' size={40} />);
 
-    
+    const history = useHistory();
 
     useEffect(()=>{
         api.get('/category')
@@ -53,8 +54,14 @@ const DropdownMenu = () => {
         if(categories !== undefined){
             return categories.map((category)=>{
                 return (
-                    <div id={category.categoryName} key={category.categoryName} className="category">
-                        {category.categoryName}
+                    <div 
+                        id={category.categoryName} 
+                        key={category.categoryId} 
+                        className="category"
+                    >
+                        <div 
+                            onClick={() => handleCategoryClick(category.categoryId, category.categoryName)}
+                        >{category.categoryName}</div>
                         <div className='sub-cats'>
                             {renderCategory(category.subCategories)}
                         </div>
@@ -62,6 +69,10 @@ const DropdownMenu = () => {
                 )
             })
         }
+    }
+
+    function handleCategoryClick(categoryId, categoryName){
+        history.push("/produtos/" + categoryName);
     }
 
     return(

@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const base64Img = require('base64-img');
 const Products = require('../model/product.model');
 const Category = require('../model/category.model');
 //const formidable = require('formidable');
@@ -60,12 +61,12 @@ router.get('/findByCodg', (req, res)=> {
   Products.findOne({where: { //procura na tabela produto
     codgProd: req.query.codgProd, //codg de barras
   }}).then((product) =>{   
-    if(product.codgProd === parseInt(req.query.codgProd)){
+    if(product.codgProd === parseInt(req.query.codgProd)){         
       return res.send({
         nameProd: product.nameProd,
         stockProd: product.stockProd,
         priceProd: product.priceProd,
-        imageProd: product.imageProd,
+        imageProd: product.imageProd.toString('base64'),
         previewProd: product.previewProd,
         categoryId: product.categoryId,
         codgProd: product.codgProd,
@@ -83,7 +84,10 @@ router.get('/findByCategory', (req, res)=> {
   console.log(req.query.categoryId)
   Products.findAll({where: { //procura na tabela produto
     categoryId: value, 
-  }}).then((productList) =>{          
+  }}).then((productList) =>{   
+    productList.forEach((product) => {
+      product.imageProd = product.imageProd.toString('base64');
+    });       
     res.send(productList)            
   }).catch((error) =>{
     return res.status(500).send(error)

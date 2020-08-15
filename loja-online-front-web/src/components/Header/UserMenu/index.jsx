@@ -36,11 +36,9 @@ const UserMenu = () => {
 		if (encryptedUserToken) {
 			decriptLocalStorage('@loja-online/userToken').then(res => {
 				const user = res;
-				console.log(res);
 
 				userTokenAuthentication(user).then(res => {
 					if(res){
-						console.log("logado")
 						dispatch(login(user));
 					} else {
 						dispatch(logout());

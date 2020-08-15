@@ -6,6 +6,7 @@ import Home from './Pages/ClientPages/Home';
 import Login from './Pages/ClientPages/Login';
 import RegisterUser from './Pages/ClientPages/RegisterUser';
 import Testes from './Pages/ClientPages/Testes';
+import Products from './Pages/ClientPages/Products';
 
 // imports paginas de administrador
 import Admin from './Pages/AdminPages/Admin';
@@ -24,6 +25,7 @@ const Routes = () => {
             <Route component={Login} path='/login' />
             <Route component={RegisterUser} path='/registrar-se' />
             <Route component={Testes} path='/testes' />
+            <Route component={Products} path='/produtos/:categoryName' />
 
             {/* Rotas paginas de administrador */}
             {/* <Route component={Admin} path='/admin' /> */}

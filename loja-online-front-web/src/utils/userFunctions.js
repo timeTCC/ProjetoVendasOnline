@@ -12,7 +12,6 @@ export async function userTokenAuthentication(userToken){
 
    
       return await api.post('users/authenticate', data).then(response => {
-         console.log("Usuário autenticado");
          return true;
 
       }).catch(error => {
@@ -27,8 +26,6 @@ export async function userTokenAuthentication(userToken){
                console.log("Oops, erro ao efetuar o login.");
                break;
          }
-
-         console.log(data);
          
          return false;
       });

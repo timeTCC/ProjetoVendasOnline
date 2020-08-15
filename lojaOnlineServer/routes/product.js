@@ -66,7 +66,7 @@ router.get('/findByCodg', (req, res)=> {
         nameProd: product.nameProd,
         stockProd: product.stockProd,
         priceProd: product.priceProd,
-        imageProd: product.imageProd.toString('base64'),
+        imageProd: product.imageProd.toString(),
         previewProd: product.previewProd,
         categoryId: product.categoryId,
         codgProd: product.codgProd,
@@ -86,7 +86,7 @@ router.get('/findByCategory', (req, res)=> {
     categoryId: value, 
   }}).then((productList) =>{   
     productList.forEach((product) => {
-      product.imageProd = product.imageProd.toString('base64');
+      product.imageProd = product.imageProd.toString();
     });       
     res.send(productList)            
   }).catch((error) =>{

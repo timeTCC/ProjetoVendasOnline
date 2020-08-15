@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from 'react';
 
-const Product = (props) => {
-   const [ imageBase64, setImageBase64 ] = useState('');
-   const product = props.product;
+import './styles.css';
 
-   function toBase64(data) {
-      
-   }
+const Product = (props) => {
+   const product = props.product;
   
    useEffect(()=>{
-      // let bufferOriginal = Buffer.from(product.imageProd.data);
-      // setImageBase64(bufferOriginal.toString('utf8'));
+      
    }, [])
-   
 
    return(
-      <div key={product.productId}>
-         <img src={product.imageProd}/>
+      <div className='product-card'>
+         <div className="product-image">
+            <img src={product.imageProd}/>   
+         </div>
+
+         <div className="product-info">
+            <p className="product-name">{product.nameProd}</p>
+            <p className="product-price">R$ {product.priceProd}</p>
+         </div>
       </div>
    )
 }

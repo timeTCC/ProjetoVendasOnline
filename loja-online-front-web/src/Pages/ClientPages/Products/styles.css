@@ -1,0 +1,28 @@
+#page-products .category-title {
+   margin-left: 60px;
+   font-family: Roboto;
+   font-style: normal;
+   font-weight: 500;
+   font-size: 28px;
+   line-height: 42px;
+}
+
+#page-products .page-content hr{
+   width: calc(100% - 80px);
+   margin: 10px auto 50px;
+   border: solid 1px;
+}
+
+#page-products #products{
+   margin: auto;
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   justify-content: center;
+   width: 90%;
+}
+
+#page-products #products .info{
+   margin: auto;
+   font-size: 15pt;
+}

@@ -1,0 +1,10 @@
+#sort-products {
+   width: 250px;
+   margin-top: -30px;
+   margin-left: 45px;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-around;
+   
+}
+

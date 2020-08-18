@@ -18,16 +18,16 @@ const Header = (props) => {
     function handleSearch(event) {
         event.preventDefault();
 
-        console.log('pesquisa');
+        // console.log('pesquisa');
     }
 
     useEffect(()=>{
         if(cookies.userAdminName !== undefined){
-            console.log('logado');
+            // console.log('logado');
             setUserName(cookies.userAdminName);
             setIsLogged(true);
         } else {
-            console.log(cookies.userAdminName);
+            // console.log(cookies.userAdminName);
             setIsLogged(false);
             history.push('/admin/login');
         }     

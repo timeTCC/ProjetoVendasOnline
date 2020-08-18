@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import Axios from 'axios';
 
 import AdminHeader from '../../../components/AdminHeader';
 
@@ -10,7 +11,7 @@ const AdminHome = () => {
 
     return(
         <div id="page-admin-home">
-                <AdminHeader page="Home" />
+            <AdminHeader page="Home" />
             <div className="page-content">
                 <h1>Essa é a página de administração de Home {(user != null) ? user.user : ''} </h1>
             </div>

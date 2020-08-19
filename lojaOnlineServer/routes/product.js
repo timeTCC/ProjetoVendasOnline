@@ -128,7 +128,7 @@ router.delete('/', (req, res)=> {
   }}).then(()=>{
     return res.status(200).send('Produto deletado com sucesso')
   }).catch((error) =>{
-    return res.status(500).send(error)
+    return res.status(500).send(error);
   })
 })
 

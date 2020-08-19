@@ -1,18 +1,57 @@
 #page-admin-products .page-content{
-    margin-left: 200px;
+   margin-left: 200px;
 }
 
 #page-admin-products .page-content .add-product-card{
-    height: 240px;
-    width: 180px;
-    border-radius: 5px;
+   height: 277px;
+   width: 180px;
+   border-radius: 5px;
 
-    margin: 20px;
-
-    background-color: #C4C4C4;
-    cursor: pointer;
+   margin: 20px;
+   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+   background-color: #FDB446;
+   cursor: pointer;
 }
 
 #page-admin-products .page-content .add-product-card .icon{
-    margin: 10px;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+}
+
+#page-admin-products .page-content .add-product-card .icon svg{
+   margin-left: auto;
+   margin-right: auto;
+   color: #3a1c00;
+}
+
+#page-admin-products .category-title {
+   margin-top: calc(-15vh);
+   margin-left: 60px;
+   font-family: Roboto;
+   font-style: normal;
+   font-weight: 500;
+   font-size: 28px;
+   line-height: 42px;
+}
+
+#page-admin-products .page-content hr{
+   width: calc(100% - 80px);
+   margin: 10px auto 50px;
+   border: solid 1px;
+}
+
+#page-admin-products #admin-products{
+   margin: auto;
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   justify-content: center;
+   width: 90%;
+}
+
+#page-admin-products #admin-products .info{
+   margin: auto;
+   font-size: 15pt;
 }

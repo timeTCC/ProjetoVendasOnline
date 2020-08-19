@@ -3,7 +3,7 @@ import { FiSearch, FiUser, FiChevronDown } from 'react-icons/fi';
 import { useHistory, Link } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
 
-import DropdownMenu from './DropdownMenu';
+import CategoriesMenu from '../CategoriesMenu';
 import UserMenu from './UserMenu';
 
 import './styles.css';
@@ -34,7 +34,7 @@ const Header = () => {
                             <h1 className='title'>Loja Online</h1>
                         </Link>
                         
-                        <DropdownMenu />
+                        <CategoriesMenu linkTo={true}/>
 
                     </div>
 

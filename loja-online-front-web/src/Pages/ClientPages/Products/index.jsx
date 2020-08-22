@@ -6,7 +6,7 @@ import Loading from '../../../components/Loading';
 import Product from './Product';
 import SortProducts from '../../../components/SortProducts';
 import { loadProducts } from '../../../utils/productsFunctions';
-import { setCategoryPage, setLoading } from '../../../services/actions';
+import { setCategoryPage, setLoading, unsetEditingProduct } from '../../../services/actions';
 import './styles.css';
 
 const Products = (props) => {
@@ -20,9 +20,8 @@ const Products = (props) => {
 	useEffect(()=>{
       dispatch(setCategoryPage(category));
 		dispatch(setLoading(true));
-
 		loadProducts(category).then(res => {
-            setProducts(res);
+				setProducts(res);
 		});
 	}, []);
 

@@ -1,15 +1,32 @@
 import React, {useCallback, useState, useEffect} from 'react'
+import { useSelector } from 'react-redux';
 import {useDropzone} from 'react-dropzone'
 import { FiUpload } from 'react-icons/fi'
 import './style.css';
 
-const Dropzone = ({ onFileUploaded, isImageSelected }) => {
+const Dropzone = ({ onFileUploaded, isImageSelected, preSelectedImage }) => {
 
+  const editingProduct = useSelector(state => state.editingProduct);
   const [selectedImage, setSelectedImage] = useState('');
+
+  useEffect(()=>{
+    //console.log(preSelectedImage);
+    setSelectedImage(preSelectedImage);
+    onFileUploaded(preSelectedImage);
+  }, []);
+
+  useEffect(()=>{
+    if(editingProduct){
+      setSelectedImage(editingProduct.imageProd);
+      onFileUploaded(editingProduct.imageProd);
+    }
+  }, [editingProduct])
 
   useEffect(()=>{
     if(!isImageSelected){
       setSelectedImage('');
+    } else {
+      setSelectedImage(preSelectedImage);
     }
   },[isImageSelected]);
 

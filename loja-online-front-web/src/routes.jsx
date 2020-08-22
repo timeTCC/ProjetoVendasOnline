@@ -16,6 +16,7 @@ import AdminProducts from './Pages/AdminPages/AdminProducts';
 import AdminOrders from './Pages/AdminPages/AdminOrders';
 import AdminCategories from './Pages/AdminPages/AdminCategories';
 import AdminProductRegister from './Pages/AdminPages/AdminProductRegister';
+import AdminProductEdit from './Pages/AdminPages/AdminProductEdit';
 
 const Routes = () => {
     return(
@@ -35,6 +36,7 @@ const Routes = () => {
             <Route component={AdminOrders} path='/admin/pedidos' />
             <Route component={AdminCategories} path='/admin/categorias' />
             <Route component={AdminProductRegister} path='/admin/registrar-produtos' />
+            <Route component={AdminProductEdit} path='/admin/editar-produtos/:codgProd?' />
         </BrowserRouter>
     )
 }

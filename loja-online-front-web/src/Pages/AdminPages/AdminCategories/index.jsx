@@ -25,8 +25,7 @@ const AdminCategories = () => {
         }
     }
 
-    
-
+    // Cria categoria
     async function handleCategoryCreate(event, category){
         const formData = {
             'department': event.currentTarget.querySelector('input').value,

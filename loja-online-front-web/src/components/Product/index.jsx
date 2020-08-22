@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FiEdit, FiTrash } from 'react-icons/fi';
+import { useHistory } from 'react-router';
 import api from '../../services/api';
 import { store } from 'react-notifications-component';
 
@@ -7,6 +8,8 @@ import './styles.css';
 
 const Product = (props) => {
    const product = props.product;
+   const history = useHistory();
+
    const notificationConfig = {
       message: "Configurable",
       type: "success",
@@ -44,6 +47,10 @@ const Product = (props) => {
         });
    }
 
+   function handleProductEdit(codgProd){
+      history.push('/admin/editar-produtos/'+ codgProd);
+   }
+
    if(props.editable){
       return(
          <div className='product-card'>
@@ -62,7 +69,7 @@ const Product = (props) => {
             </div>
 
             <div className="product-settings">
-               <div className='config-button'>
+               <div className='config-button' onClick={() => handleProductEdit(product.codgProd)}>
                   <div className="button-icon">
                      <FiEdit />
                   </div>

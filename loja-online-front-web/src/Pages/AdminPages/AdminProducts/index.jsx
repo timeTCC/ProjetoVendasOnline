@@ -1,27 +1,31 @@
+// Modules
 import React, { useState, useEffect } from 'react';
-import { useParams } from "react-router";
 import { useSelector, useDispatch } from 'react-redux';
 import { FiPlus } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+// Components
 import Loading from '../../../components/Loading';
 import Product from '../../../components/Product';
 import CategoriesMenu from '../../../components/CategoriesMenu';
-import { loadProducts } from '../../../utils/productsFunctions';
-import { setCategoryPage, setLoading } from '../../../services/actions';
 import SortProducts from '../../../components/SortProducts';
-import './styles.css';
+import { loadProducts } from '../../../utils/productsFunctions';
 import AdminHeader from '../../../components/AdminHeader';
+// Functions
+import { setCategoryPage, setLoading, unsetEditingProduct } from '../../../services/actions';
+// Styles
 import './styles.css';
-import { Link } from 'react-router-dom';
 
 const AdminProdutos = () => {
 	const [ products, setProducts ] = useState();
 	const [ rederedProducts, setRenderedProducts ] = useState();
 	const category = useSelector(state => state.categoryPage);
 	const isLoading = useSelector(state => state.loading);
-
 	const dispatch = useDispatch();
 
 	useEffect(()=>{
+		// Remove informações de um produto anteriormente editado
+		dispatch(unsetEditingProduct());
+
       dispatch(setCategoryPage(category));
 		dispatch(setLoading(true));
 
@@ -107,7 +111,7 @@ const AdminProdutos = () => {
 
 	return (
 		<div id="page-admin-products">
-			<AdminHeader page='products' />
+			<AdminHeader page='Produtos' />
 			<div className="page-content">
             <CategoriesMenu showUncategorized={true} linkTo={false} />
 				<h2 className="category-title">{category ? category : 'Produtos sem categoria'}</h2>

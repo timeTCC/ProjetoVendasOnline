@@ -24,3 +24,23 @@ export const setLoading = (isLoading) => {
         payload: isLoading
     }
 }
+
+export const setEditingProduct = (product) => {
+    return{
+        type: 'PRODUCT/SET',
+        payload: product
+    }
+}
+
+export const setEditingProductCatName = (catName) => {
+    return{
+        type: 'PRODUCT/SET_CAT_NAME',
+        payload: catName
+    }
+}
+
+export const unsetEditingProduct = () => {
+    return{
+        type: 'PRODUCT/UNSET'
+    }
+}

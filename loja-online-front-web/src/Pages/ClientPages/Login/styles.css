@@ -9,7 +9,7 @@
     justify-content: center;
 }
 
-#login-form{
+#page-Login #login-form{
     height: 425px;
     width: 390px;
     background: #FDFCFC;
@@ -17,10 +17,9 @@
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    margin: auto;
 }
 
-#login-form .login-submit-button{
+#page-Login #login-form .login-submit-button{
     width: 305px;
     height: 60px;
     background: #FF9F10;
@@ -40,11 +39,11 @@
     cursor: pointer;
 }
 
-#login-form .login-submit-button:focus{
+#page-Login #login-form .login-submit-button:focus{
     outline: none;
 }
 
-#login-form .login-text-input{
+#page-Login #login-form .login-text-input{
     margin: 30px auto;
     width: 280px;
     height: 30px;
@@ -61,24 +60,24 @@
     line-height: 21px;
 }
 
-#login-form .login-text-input::placeholder{
+#page-Login #login-form .login-text-input::placeholder{
     color: #fdb44698;
 
 }
 
-#login-form .login-text-input:focus{
+#page-Login #login-form .login-text-input:focus{
     outline: none;
 }
 
-#login-form .title{
+#page-Login #login-form .title{
     margin: 7px auto 40px auto;
 }
 
-#login-form .login-status{
+#page-Login #login-form .login-status{
     margin: 0px auto 5px auto;
     height: 10px;
 }
 
-#login-form .login-submit-button .loading{
+#page-Login #login-form .login-submit-button .loading{
     margin-left: 135px;
 }

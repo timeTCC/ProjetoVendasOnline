@@ -73,7 +73,7 @@ const AdminProductRegister = () => {
                     return () => clearTimeout(timer);
 
                 case 500:
-                    setLoadingButton("Ouve um erro");
+                    setLoadingButton("Ouve um erro, verifique não prencheu nada errado.");
 
                     var timer = setTimeout(() => {
                         setLoadingButton("Cadastrar");
@@ -97,7 +97,7 @@ const AdminProductRegister = () => {
         if(loading){
             setLoadingButton(
                 <div className='loading'>
-                    <Loading color='white' size={30} />
+                    <Loading color='white' size={30} id='create-product-loading' isLoading={true}/>
                 </div>
             );
         } else {
@@ -128,13 +128,15 @@ const AdminProductRegister = () => {
                 <div id="create-product">
 
                     <form id="register-product-form" onSubmit={handleSubmit}>
-                        <input required type="text" name="codgProd" placeholder="Código do produto" onChange={handleInputChange} />
+                    
+
+                        <input pattern="\d*" required type="text" name="codgProd" placeholder="Código do produto" onChange={handleInputChange} />
                         <input required type="text" name="nameProd" placeholder="Nome do produto" onChange={handleInputChange} />
                         <textarea required name="descriptionProd" placeholder="Descrição do produto" onChange={handleInputChange}></textarea>
 
                         <div required className='input-set'>
-                            <input type="text" name="priceProd" placeholder="Preço do produto" onChange={handleInputChange} />
-                            <input type="text" name="stockProd" placeholder="Qtd em estoque" onChange={handleInputChange} />
+                            <input type="text" pattern="\d*" name="priceProd" placeholder="Preço do produto" onChange={handleInputChange} />
+                            <input type="text" pattern="\d*" name="stockProd" placeholder="Qtd em estoque" onChange={handleInputChange} />
                         </div>
 
                         <select required name="categoryId" onChange={handleInputChange}>

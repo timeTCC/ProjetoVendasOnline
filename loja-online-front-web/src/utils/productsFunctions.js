@@ -1,5 +1,6 @@
 import api from '../services/api';
 
+// Carrega produtos por categoria
 export async function loadProducts(categoryName){
    return await api.get('/category/categoryList')
    .then(async res => {
@@ -32,6 +33,15 @@ export async function loadProducts(categoryName){
       console.log(err);
       return err;
 
-   }).finally(res => {
+   })
+}
+
+// Carrega produto pelo seu código
+export async function loadProductByCodg(codgProd){
+   return await api.get('http://localhost:3333/product/findByCodg?codgProd=' + codgProd).then(res => {
+      return res.data;
+   }).catch(err => {
+      console.log(err);
+      return err;
    })
 }

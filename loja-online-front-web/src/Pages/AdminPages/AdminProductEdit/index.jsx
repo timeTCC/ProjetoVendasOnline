@@ -1,20 +1,29 @@
+// Modulos
 import React, { useState, useEffect } from 'react';
-
+import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+// Actions
+import { setEditingProduct, setEditingProductCatName, unsetEditingProduct } from '../../../services/actions';
+// Componentes
 import AdminHeader from '../../../components/AdminHeader';
 import Dropzone from '../../../components/Dropzone';
-import ReactLoading from 'react-loading';
-
-import api from '../../../services/api';
 import Loading from '../../../components/Loading';
-
+// Functions
+import api from '../../../services/api';
+import { loadProductByCodg } from '../../../utils/productsFunctions';
+import { getCategoryName } from '../../../utils/categoriesFunctions';
+// Classes
+import Product from '../../../classes/product';
+// Styles
 import './styles.css';
 
-const AdminProductRegister = () => {
-    const [ loadingButton, setLoadingButton ] = useState('Cadastrar');
+const AdminProductEdit = (props) => {
+    const [ loadingButton, setLoadingButton ] = useState('Salvar');
     const [ isImageSelected, setIsImageSelected] = useState(true);
     const [ categories, setCategories ] = useState([]);
-
+    const [ productCat, setProductCat ] = useState('');
     const [selectedFile, setSelectedFile] = useState();
+    const editingProduct = useSelector(state => state.editingProduct);
     const [formData, setFormData] = useState({
         "nameProd": String,
         "descriptionProd": String,
@@ -26,6 +35,53 @@ const AdminProductRegister = () => {
         "codgProd": Int16Array
     });
 
+    const dispatch = useDispatch();
+    const history = useHistory();
+    
+    useEffect(()=>{
+        // Verifica se há um produto trazido pela variavel e o carrega
+        if(props.match.params.codgProd){
+            // Carrega o Produto
+            loadProductByCodg(props.match.params.codgProd).then(res => {
+                dispatch(setEditingProduct(res));
+
+                // Carrega o nome da categoria pelo id indicado no objeto do produto
+                getCategoryName(res.categoryId).then(response => {
+                    setProductCat(response);
+                    dispatch(setEditingProductCatName(response)); // O produto é posto em um estado global                 
+                });
+
+                // Indica se há um arquivo selecionado e qual é
+                setSelectedFile(res.imageProd);
+            });
+        }    
+
+        // Carrega as categorias disponiveis para a seleção
+        loadCategories().then(res => setCategories(res));
+    },[]);
+
+    // Quando é selecionada uma imagem ela é posta ou substitui
+    // a existente no objeto de dados do formulário
+    useEffect(()=>{
+        setFormData({ ...formData, "imageProd": selectedFile});
+        setIsImageSelected(true);
+    },[selectedFile]);
+
+    // Mostra no console mudanças feitas no objeto de dados do formulário
+    useEffect(()=>{
+        //console.log(formData);
+    }, [formData]);
+
+    // Verifica se o estado global de edição do objeto não é nulo
+    // e as trasfere para o objeto local de dados do formulário
+    useEffect(()=>{
+        if(editingProduct){
+            setFormData(editingProduct);
+        }
+    }, [editingProduct])
+ 
+    // Função que fas as vias de enviar o objeto de dados do formulario para o servidor
+    // atualizando assim o produto
     async function handleSubmit(event){
         event.preventDefault();
 
@@ -37,24 +93,26 @@ const AdminProductRegister = () => {
             setLoadingButton("É obrigatória a seleção de uma imagem!");
 
             var timer = setTimeout(() => {
-                setLoadingButton("Cadastrar");
+                setLoadingButton("Salvar");
             }, 1000);
 
             return () => clearTimeout(timer);
         }
 
-        await api.post('product', formData).then((response)=>{
+        await api.put('product', formData).then((response)=>{
             isButtonLoading(false);
 
             document.getElementById("register-product-form").reset();
             setIsImageSelected(false);
-            setLoadingButton("Produto cadastrado!");
+            setLoadingButton("Alterações salvas!");
 
             setFormData({ ...formData, imageProd: '' })
             setSelectedFile('');
+
+            history.push('/admin/produtos');
             
             var timer = setTimeout(() => {
-                setLoadingButton("Cadastrar");
+                setLoadingButton("Salvar");
             }, 1000);
 
             return () => clearTimeout(timer);
@@ -67,16 +125,16 @@ const AdminProductRegister = () => {
                     setLoadingButton("Produto de mesmo código já cadastrado");
 
                     var timer = setTimeout(() => {
-                        setLoadingButton("Cadastrar");
+                        setLoadingButton("Salvar");
                     }, 1000);
 
                     return () => clearTimeout(timer);
 
                 case 500:
-                    setLoadingButton("Ouve um erro");
+                    setLoadingButton("Ouve um erro, verifique não prencheu nada errado.");
 
                     var timer = setTimeout(() => {
-                        setLoadingButton("Cadastrar");
+                        setLoadingButton("Salvar");
                     }, 1000);
 
                     return () => clearTimeout(timer);
@@ -87,6 +145,18 @@ const AdminProductRegister = () => {
         console.log(formData);
     }
 
+    // Carrega as categorias disponivel para a seleçao no banco de dados
+    async function loadCategories(){
+        return await api.get('/category/categoryList')
+        .then(res=>{
+            return res.data;
+        })
+        .catch(error=>{
+            return 'Erro ao carregar categorias';
+        })
+    }
+
+    // Coloca as mudanças dos input na variavel de dados do formulário
     function handleInputChange(event){
         const { name, value } = event.target;
 
@@ -97,62 +167,90 @@ const AdminProductRegister = () => {
         if(loading){
             setLoadingButton(
                 <div className='loading'>
-                    <Loading color='white' size={30} />
+                    <Loading color='white' size={30} id='create-product-loading' isLoading={true}/>
                 </div>
             );
         } else {
             setLoadingButton('Entrar');
         }
     }
-    
-    useEffect(()=>{
-        setFormData({ ...formData, "imageProd": selectedFile});
-        setIsImageSelected(true);
-    },[selectedFile]);
-
-    useEffect(()=>{
-        api.get('/category/categoryList')
-        .then(res=>{
-            setCategories(res.data);
-        })
-        .catch(error=>{
-            setCategories('Erro ao carregar categorias');
-        })
-    },[]);
 
     return(
         <div id="page-admin-producs-register">
-                <AdminHeader page="Produtos" />
+            
+            <AdminHeader page="Produtos" />
 
             <div className="page-content">
                 <div id="create-product">
 
                     <form id="register-product-form" onSubmit={handleSubmit}>
-                        <input required type="text" name="codgProd" placeholder="Código do produto" onChange={handleInputChange} />
-                        <input required type="text" name="nameProd" placeholder="Nome do produto" onChange={handleInputChange} />
-                        <textarea required name="descriptionProd" placeholder="Descrição do produto" onChange={handleInputChange}></textarea>
+                        <input
+                            disabled={true}
+                            required 
+                            type="text" 
+                            name="codgProd" 
+                            placeholder="Código do produto" 
+                            value={formData.codgProd}
+                            onChange={handleInputChange} 
+                        />
+                        <input 
+                            required 
+                            type="text" 
+                            name="nameProd" 
+                            placeholder="Nome do produto" 
+                            value={formData.nameProd}
+                            onChange={handleInputChange} 
+                        />
+                        <textarea
+                            required 
+                            name="descriptionProd" 
+                            placeholder="Descrição do produto" 
+                            value={formData.descriptionProd}
+                            onChange={handleInputChange}>
+                        </textarea>
 
-                        <div required className='input-set'>
-                            <input type="text" name="priceProd" placeholder="Preço do produto" onChange={handleInputChange} />
-                            <input type="text" name="stockProd" placeholder="Qtd em estoque" onChange={handleInputChange} />
+                        <div className='input-set'>
+                            <input 
+                                required
+                                type="text" 
+                                pattern="\d*"
+                                name="priceProd" 
+                                placeholder="Preço do produto" 
+                                value={formData.priceProd}
+                                onChange={handleInputChange} 
+                            />
+                            <input 
+                                type="text" 
+                                pattern="\d*"
+                                name="stockProd" 
+                                placeholder="Qtd em estoque" 
+                                value={formData.stockProd}
+                                onChange={handleInputChange} 
+                                required 
+                            />
                         </div>
 
-                        <select required name="categoryId" onChange={handleInputChange}>
-                            <option value="">Selecione um departamento ...</option>
-                            {
-                                categories.map(category=>{
+                        <select 
+                            required 
+                            name="categoryId"
+                            value={formData.categoryId} 
+                            onChange={handleInputChange}>
+                            <option value="">{(productCat) ? productCat : 'Selecione uma categoria...'}</option>
+                            {  
+                                (categories) ? categories.map(category=>{
                                     return(
                                         <option key={category.categoryId} value={category.categoryId}>{category.subdepartment}</option>
                                     )
-                                })
+                                }) : ''
+                                
                             }
                         </select>
 
                         <button required type="submit">{loadingButton}</button>
 
                     </form>
-
-                    <Dropzone onFileUploaded={setSelectedFile} isImageSelected={isImageSelected}/>
+                    
+                    <Dropzone onFileUploaded={setSelectedFile} isImageSelected={isImageSelected}  />
 
                 </div>
             </div>
@@ -161,4 +259,4 @@ const AdminProductRegister = () => {
     )
 }
 
-export default AdminProductRegister;
+export default AdminProductEdit;
